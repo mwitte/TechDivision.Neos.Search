@@ -1,0 +1,9 @@
+# change injected properties for class..
+Com\TechDivision\Neos\Search\Provider\SearchProvider:
+  properties:
+    # the properties to change
+    searchProvider:
+      # define the implementation for the property
+      # works only with classes which implement the selected interface
+      # interface: \Com\TechDivision\Search\Provider\ProviderInterface
+      object: 'Com\TechDivision\Search\Provider\Solr\Provider'
