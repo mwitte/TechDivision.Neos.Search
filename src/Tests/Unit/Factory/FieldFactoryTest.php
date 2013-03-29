@@ -60,19 +60,21 @@ class FieldFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 			new \Com\TechDivision\Search\Field\Field('myOtherFieldName', '')
 		);
 		$configurations = array(
-			'x' => array(
-				'properties' =>
-				array(
-					'propertyName' => array(
-						'fieldName' => 'myFieldNameAlias'
-					)
+			'T3CRNode' => array(
+				'x' => array(
+					'properties' =>
+					array(
+						'propertyName' => array(
+							'fieldName' => 'myFieldNameAlias'
+						)
+					),
 				),
-			),
-			'y' => array(
-				'properties' =>
-				array(
-					'otherPropertyName' => array(
-						'fieldName' => 'myOtherFieldNameAlias'
+				'y' => array(
+					'properties' =>
+					array(
+						'otherPropertyName' => array(
+							'fieldName' => 'myOtherFieldNameAlias'
+						)
 					)
 				)
 			)

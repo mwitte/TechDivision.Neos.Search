@@ -33,19 +33,27 @@ class TDNeosSearchCommandController extends \TYPO3\Flow\Cli\CommandController {
 	/**
 	 * Search with token
 	 *
-	 * @param string $token Token to search with
 	 * @return void
 	 */
-	public function searchCommand($token) {
-		if(!$token){
+	public function searchCommand() {
+
+		if(!$this->request->getExceedingArguments()){
 			$this->outputLine('Please provide a token to search with.');
 			return;
 		}
-		$this->outputLine('Searching for "%s"', array($token));
-		$results = $this->searchProvider->search($token);
+
+		$searchToken = "";
+		foreach($this->request->getExceedingArguments() as $word){
+			$searchToken .= " " . $word;
+		}
+
+		$this->outputLine('Searching for "%s"', array($searchToken));
+		$results = $this->searchProvider->search($searchToken);
 		$this->outputLine('Found %s documents:', array(count($results)));
-		/** @var $document \Com\TechDivision\Search\Document\DocumentInterface */
-		foreach($results as $document){
+		/** @var $result \Com\TechDivision\Neos\Search\Domain\Model\Result */
+		foreach($results as $result){
+			$this->outputLine('Page: %s', array($result->getNode()->getProperty('title')));
+			$document = $result->getDocument();
 			$fields = $document->getFields();
 			/** @var $field \Com\TechDivision\Search\Field\FieldInterface */
 			foreach($fields as $field){
@@ -54,6 +62,7 @@ class TDNeosSearchCommandController extends \TYPO3\Flow\Cli\CommandController {
 			$this->outputLine('');
 			$this->outputLine('');
 		}
+		$this->outputLine('Found %s documents:', array(count($results)));
 	}
 
 }

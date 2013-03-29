@@ -1,9 +1,8 @@
 <?php
 
 namespace Com\TechDivision\Neos\Search\Tests\Functional\Provider;
-/**
- * Testcase for Board
- */
+
+
 class SearchProviderTest extends \TYPO3\Flow\Tests\FunctionalTestCase {
 
 	/**

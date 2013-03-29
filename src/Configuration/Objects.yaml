@@ -7,3 +7,5 @@ Com\TechDivision\Neos\Search\Provider\SearchProvider:
       # works only with classes which implement the selected interface
       # interface: \Com\TechDivision\Search\Provider\ProviderInterface
       object: 'Com\TechDivision\Search\Provider\Solr\Provider'
+    resultFactory:
+      object: 'Com\TechDivision\Neos\Search\Factory\ResultFactory'

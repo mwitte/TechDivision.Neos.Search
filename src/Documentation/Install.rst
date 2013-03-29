@@ -25,4 +25,9 @@ Neuimplementierung gemäß TDD
 7 h Implementierung TechDivision.Search
 24.4:
 5 h Implementierung TechDivision.Search (13:30)
+----------------------------------------
+14 h TechDivision.Search vorerst fertig
+
+24.4:
 4 h Implementierung TechDivision.Neos.Search
+3 h Implementierung TechDivision.Neos.Search Factories

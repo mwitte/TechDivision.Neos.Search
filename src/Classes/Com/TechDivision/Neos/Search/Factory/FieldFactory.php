@@ -2,7 +2,6 @@
 namespace Com\TechDivision\Neos\Search\Factory;
 
 use TYPO3\Flow\Annotations as Flow;
-use Com\TechDivision\Search\Document\Document;
 
 class FieldFactory {
 
@@ -47,22 +46,24 @@ class FieldFactory {
 	}
 
 	/**
-	 * @param array $contentTypeConfigurations configurations for multiple ContentTypes
+	 * @param array $documentTypes configurations for multiple ContentTypes
 	 * @return array with Com\TechDivision\Search\Field\Field
 	 */
-	public function createFromMultipleConfigurations(array $contentTypeConfigurations, array $fieldNames){
+	public function createFromMultipleConfigurations(array $schemaConfig, array $fieldNames){
 		$fields = array();
-		foreach($contentTypeConfigurations as $propertyName => $configuration){
-
-			foreach($configuration['properties'] as $propertyConfiguration){
-				$field = $this->createFromConfiguration($propertyConfiguration, $fieldNames, $propertyName);
-				if($field){
-					$fields[] = $field;
+		foreach($schemaConfig['DocumentTypes'] as $documentTypeName => $documentType){
+			foreach($documentType as $propertyName => $configuration){
+				foreach($configuration['properties'] as $propertyConfiguration){
+					$field = $this->createFromConfiguration($propertyConfiguration, $fieldNames, $propertyName);
+					if($field){
+						$fields[] = $field;
+					}
 				}
-
 			}
-
+			$fields[] = new \Com\TechDivision\Search\Field\Field($schemaConfig['DocumentTypeField'], $documentTypeName);
+			$fields[] = new \Com\TechDivision\Search\Field\Field($schemaConfig['DocumentIdentifierField'], '');
 		}
+
 		return $fields;
 	}
 }

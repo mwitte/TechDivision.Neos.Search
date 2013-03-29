@@ -32,10 +32,22 @@ class SearchProvider {
 	protected $searchProvider;
 
 	/**
+	 * @var \Com\TechDivision\Neos\Search\Factory\ResultFactoryInterface
+	 * @Flow\Inject
+	 */
+	protected $resultFactory;
+
+	/**
 	 * @var \TYPO3\TYPO3CR\Domain\Repository\NodeRepository
 	 * @Flow\Inject
 	 */
 	protected $nodeRepository;
+
+	/**
+	 * @var \TYPO3\TYPO3CR\Domain\Repository\WorkspaceRepository
+	 * @Flow\Inject
+	 */
+	protected $workspaceRepository;
 
 	/**
 	 * @param $token
@@ -43,12 +55,15 @@ class SearchProvider {
 	 */
 	public function search($token, $rows = 50, $offset = 0){
 		$fieldFactory = new \Com\TechDivision\Neos\Search\Factory\FieldFactory();
-		return $this->searchProvider->searchByString(
+		$query = $this->searchProvider->searchByString(
 			$token,
-			$fieldFactory->createFromMultipleConfigurations($this->settings['Schema']['ContentTypes'], $this->settings['Schema']['FieldNames']),
+			$fieldFactory->createFromMultipleConfigurations($this->settings['Schema'], $this->settings['Schema']['FieldNames']),
 			$rows,
-			$offset
-		);
+			$offset);
+		return $this->resultFactory->createMultipleFromDocuments(
+			$query,
+			$this->workspaceRepository->findByName('live')->getFirst(),
+			$this->settings);
 	}
 
 	/**
@@ -60,14 +75,14 @@ class SearchProvider {
 		foreach($nodes as $node){
 			$document = $documentFactory->createFromNode(
 				$node,
-				$this->settings['Schema']['ContentTypes'],
-				$this->settings['Schema']['FieldNames'],
-				$this->settings['Schema']['DocumentIdentifierField']
+				$this->settings['Schema']
 			);
 			if($document){
 				$this->searchProvider->addDocument($document);
 			}
 		}
+
+
 
 	}
 }
