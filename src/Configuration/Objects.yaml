@@ -9,3 +9,5 @@ Com\TechDivision\Neos\Search\Provider\SearchProvider:
       object: 'Com\TechDivision\Search\Provider\Solr\Provider'
     resultFactory:
       object: 'Com\TechDivision\Neos\Search\Factory\ResultFactory'
+    documentFactory:
+      object: 'Com\TechDivision\Neos\Search\Factory\DocumentFactory'

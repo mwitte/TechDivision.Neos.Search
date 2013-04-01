@@ -11,6 +11,11 @@ class Result {
 	 *
 	 * @var \TYPO3\TYPO3CR\Domain\Model\Node
 	 */
+	protected $pageNode;
+
+	/**
+	 * @var \TYPO3\TYPO3CR\Domain\Model\Node
+	 */
 	protected $node;
 
 	/**
@@ -37,7 +42,23 @@ class Result {
 	/**
 	 * @param \TYPO3\TYPO3CR\Domain\Model\Node $node
 	 */
-	public function setNode(\TYPO3\TYPO3CR\Domain\Model\Node $node)
+	public function setPageNode(\TYPO3\TYPO3CR\Domain\Model\Node $node)
+	{
+		$this->pageNode = $node;
+	}
+
+	/**
+	 * @return \TYPO3\TYPO3CR\Domain\Model\Node
+	 */
+	public function getPageNode()
+	{
+		return $this->pageNode;
+	}
+
+	/**
+	 * @param \TYPO3\TYPO3CR\Domain\Model\Node $node
+	 */
+	public function setNode($node)
 	{
 		$this->node = $node;
 	}

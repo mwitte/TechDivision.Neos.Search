@@ -1,0 +1,12 @@
+{namespace t=TYPO3\Neos\ViewHelpers}
+<f:for each="{results}" as="result">
+    <div>
+        <h2><t:link.node node="{result.pageNode}">{result.pageNode.label}</t:link.node></h2>
+        <f:for each="{result.document.fields}" as="field">
+            <p>
+                <b>{field.name}:</b>
+                {field.value -> f:format.stripTags()}
+            </p>
+        </f:for>
+    </div>
+</f:for>

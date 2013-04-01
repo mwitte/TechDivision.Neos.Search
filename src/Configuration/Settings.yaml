@@ -4,11 +4,13 @@ Com:
       Search:
 
         Workspace: 'live'
+        DetailResults: true
 
         # defines the schema for solr
         Schema:
           # defines the uniqueKey field
           DocumentIdentifierField: 'id'
+          PageNodeIdentifier: 'subject'
           # defines the documentType field
           DocumentTypeField: 'category'
           # default boost for the document
@@ -17,42 +19,51 @@ Com:
           FieldDefaultBoost: 1.0
           DocumentTypes:
             T3CRNode:
-              # Add here every contentType with their properties which should get indexed by solr
-              # The boosts(float) are optional, fallback is the DefaultDocumentBoost or DefaultFieldBoost
-              # The fieldName gets configured in the next section.
-              #
-              # Example:
-              #
-              # My.Awesome.Content:Type:
-              #   documentBoost: 1.2
-              #   properties:
-              #     property1:
-              #       fieldName: 'field123'
-              #       fieldBoost: 1.5
-              #     otherProperty:
-              #       fieldName: 'field124'
-              #
-              #
-              TYPO3.Neos.ContentTypes:Text:
-                documentBoost: 1.0
-                properties:
-                  text:
-                    fieldName: 'field2'
-                    fieldBoost: 1
-              TYPO3.Neos.ContentTypes:Headline:
-                properties:
-                  title:
-                    fieldName: 'field1'
-                    fieldBoost: 1
-              TYPO3.Neos.ContentTypes:Page:
-                properties:
-                  title:
-                    fieldName: 'field1'
-              TYPO3.Neos.ContentTypes:Shortcut:
-                properties:
-                  title:
-                    fieldName: 'field1'
+              ContentTypeField: 'comments'
+              ContentTypes:
+                # Add here every contentType with their properties which should get indexed by solr
+                # The boosts(float) are optional, fallback is the DefaultDocumentBoost or DefaultFieldBoost
+                # The fieldName gets configured in the next section.
+                #
+                # Example:
+                #
+                # My.Awesome.Content:Type:
+                #   documentBoost: 1.2
+                #   properties:
+                #     property1:
+                #       fieldName: 'field123'
+                #       fieldBoost: 1.5
+                #     otherProperty:
+                #       fieldName: 'field124'
+                #
+                #
+                TYPO3.Neos.ContentTypes:Text:
+                  documentBoost: 1.0
+                  properties:
+                    text:
+                      fieldName: 'field1'
+                      fieldBoost: 1
+                TYPO3.Neos.ContentTypes:Headline:
+                  properties:
+                    title:
+                      fieldName: 'field1'
+                      fieldBoost: 1
+                TYPO3.Neos.ContentTypes:Page:
+                  properties:
+                    title:
+                      fieldName: 'field1'
           # Defines the fieldNames of the solr scheme
           FieldNames:
-            field1: 'subject'
+            field1: 'description'
             field2: 'description'
+        ## do not change, this contentType is required for Neos ##
+        ResultContentType: 'TYPO3.Neos.ContentTypes:Page'
+TYPO3:
+  TYPO3CR:
+    contentTypes:
+      'Com.TechDivision.Neos.Search:SearchPlugin':
+        superTypes: ['TYPO3.Neos.ContentTypes:Plugin']
+        label: 'Searchbox'
+        group: 'Plugins'
+        icon: 'Images/Icons/White/zoom_icon-16.png'
+        darkIcon: 'Images/Icons/Black/zoom_icon-16.png'

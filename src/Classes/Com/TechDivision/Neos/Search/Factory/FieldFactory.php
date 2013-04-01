@@ -3,7 +3,26 @@ namespace Com\TechDivision\Neos\Search\Factory;
 
 use TYPO3\Flow\Annotations as Flow;
 
+/**
+ *
+ * @Flow\Scope("singleton")
+ */
 class FieldFactory {
+
+	/**
+	 * @var array
+	 */
+	protected $settings;
+
+	/**
+	 * Inject the settings
+	 *
+	 * @param array $settings
+	 * @return void
+	 */
+	public function injectSettings(array $settings) {
+		$this->settings = $settings;
+	}
 
 	/**
 	 * @param string $propertyName
@@ -46,22 +65,22 @@ class FieldFactory {
 	}
 
 	/**
-	 * @param array $documentTypes configurations for multiple ContentTypes
 	 * @return array with Com\TechDivision\Search\Field\Field
 	 */
-	public function createFromMultipleConfigurations(array $schemaConfig, array $fieldNames){
+	public function createFromMultipleConfigurations(){
 		$fields = array();
-		foreach($schemaConfig['DocumentTypes'] as $documentTypeName => $documentType){
-			foreach($documentType as $propertyName => $configuration){
+		foreach($this->settings['Schema']['DocumentTypes'] as $documentTypeName => $documentType){
+			foreach($documentType['ContentTypes'] as $propertyName => $configuration){
 				foreach($configuration['properties'] as $propertyConfiguration){
-					$field = $this->createFromConfiguration($propertyConfiguration, $fieldNames, $propertyName);
+					$field = $this->createFromConfiguration($propertyConfiguration, $this->settings['Schema']['FieldNames'], $propertyName);
 					if($field){
 						$fields[] = $field;
 					}
 				}
 			}
-			$fields[] = new \Com\TechDivision\Search\Field\Field($schemaConfig['DocumentTypeField'], $documentTypeName);
-			$fields[] = new \Com\TechDivision\Search\Field\Field($schemaConfig['DocumentIdentifierField'], '');
+			$fields[] = new \Com\TechDivision\Search\Field\Field($this->settings['Schema']['DocumentTypeField'], $documentTypeName);
+			$fields[] = new \Com\TechDivision\Search\Field\Field($this->settings['Schema']['DocumentIdentifierField'], '');
+			$fields[] = new \Com\TechDivision\Search\Field\Field($this->settings['Schema']['PageNodeIdentifier'], '');
 		}
 
 		return $fields;

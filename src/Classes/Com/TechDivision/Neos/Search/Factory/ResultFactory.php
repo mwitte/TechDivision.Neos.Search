@@ -6,6 +6,10 @@ use TYPO3\TYPO3CR\Domain\Model\Node;
 use Com\TechDivision\Search\Document\Document;
 use Com\TechDivision\Neos\Search\Domain\Model\Result;
 
+/**
+ *
+ * @Flow\Scope("singleton")
+ */
 class ResultFactory implements ResultFactoryInterface{
 
 	/**
@@ -15,25 +19,38 @@ class ResultFactory implements ResultFactoryInterface{
 	protected $nodeResultFactory;
 
 	/**
+	 * @var array
+	 */
+	protected $settings;
+
+	/**
+	 * Inject the settings
+	 *
+	 * @param array $settings
+	 * @return void
+	 */
+	public function injectSettings(array $settings) {
+		$this->settings = $settings;
+	}
+
+	/**
 	 * This Method delegates the creation of responseObjects, you may extend this class and overwrite this method
 	 * to add you own results
 	 *
 	 * @param \Com\TechDivision\Search\Document\DocumentInterface $document
 	 * @param \TYPO3\TYPO3CR\Domain\Model\Workspace $workspace
-	 * @param array $configuration
 	 * @return \Com\TechDivision\Neos\Search\Domain\Model\Result|null
 	 */
 	public function createFromDocument(
 		\Com\TechDivision\Search\Document\DocumentInterface $document,
-		\TYPO3\TYPO3CR\Domain\Model\Workspace $workspace,
-		array $configuration)
+		\TYPO3\TYPO3CR\Domain\Model\Workspace $workspace)
 	{
 
-		if($document->getField($configuration['Schema']['DocumentTypeField'])){
-			switch($document->getField($configuration['Schema']['DocumentTypeField'])->getValue()){
+		if($document->getField($this->settings['Schema']['DocumentTypeField'])){
+			switch($document->getField($this->settings['Schema']['DocumentTypeField'])->getValue()){
 				case 'T3CRNode':
 					//var_dump($document);
-					return $this->nodeResultFactory->createResultFromNodeDocument($document, $workspace, $configuration);
+					return $this->nodeResultFactory->createResultFromNodeDocument($document, $workspace);
 			}
 		}
 		return null;
@@ -47,15 +64,24 @@ class ResultFactory implements ResultFactoryInterface{
 	 */
 	public function createMultipleFromDocuments(
 		array $documents,
-		\TYPO3\TYPO3CR\Domain\Model\Workspace $workspace,
-		array $configuration)
+		\TYPO3\TYPO3CR\Domain\Model\Workspace $workspace)
 	{
 		$results = array();
+		$pageNodes = array();
 		/** @var $document \Com\TechDivision\Search\Document\DocumentInterface */
 		foreach($documents as $document){
-			$result = $this->createFromDocument($document, $workspace, $configuration);
-			if($result){
-				$results[] = $result;
+			$pageNodeIdentifierField = $document->getField($this->settings['Schema']['PageNodeIdentifier']);
+			if($pageNodeIdentifierField){
+				$pageNodeIdentifier = $pageNodeIdentifierField->getValue();
+
+				// removes page node duplicates
+				if(!in_array($pageNodeIdentifier, $pageNodes)){
+					$result = $this->createFromDocument($document, $workspace);
+					if($result){
+						$results[] = $result;
+						$pageNodes[] = $pageNodeIdentifier;
+					}
+				}
 			}
 		}
 		return $results;

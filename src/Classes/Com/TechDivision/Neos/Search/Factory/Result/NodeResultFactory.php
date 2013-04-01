@@ -6,6 +6,10 @@ use TYPO3\TYPO3CR\Domain\Model\Node;
 use Com\TechDivision\Search\Document\Document;
 use Com\TechDivision\Neos\Search\Domain\Model\Result;
 
+/**
+ *
+ * @Flow\Scope("singleton")
+ */
 class NodeResultFactory{
 
 	/**
@@ -21,6 +25,21 @@ class NodeResultFactory{
 	protected $nodeService;
 
 	/**
+	 * @var array
+	 */
+	protected $settings;
+
+	/**
+	 * Inject the settings
+	 *
+	 * @param array $settings
+	 * @return void
+	 */
+	public function injectSettings(array $settings) {
+		$this->settings = $settings;
+	}
+
+	/**
 	 * @param \Com\TechDivision\Search\Document\Document $document
 	 * @param \TYPO3\TYPO3CR\Domain\Model\Workspace $workspace
 	 * @param array $configuration
@@ -28,15 +47,15 @@ class NodeResultFactory{
 	 */
 	public function createResultFromNodeDocument(
 		Document $document,
-		\TYPO3\TYPO3CR\Domain\Model\Workspace $workspace,
-		array $configuration)
+		\TYPO3\TYPO3CR\Domain\Model\Workspace $workspace)
 	{
-		if($document->getField($configuration['Schema']['DocumentIdentifierField'])){
-			$pageNode = $this->nodeService->getPageNodeByNodeIdentifier($document->getField($configuration['Schema']['DocumentIdentifierField'])->getValue(), $workspace);
+		if($document->getField($this->settings['Schema']['DocumentIdentifierField'])){
+			$pageNode = $this->nodeService->getPageNodeByNodeIdentifier($document->getField($this->settings['Schema']['DocumentIdentifierField'])->getValue(), $workspace);
 			if($pageNode){
 				$result = new Result();
-				$result->setNode($pageNode);
+				$result->setPageNode($pageNode);
 				$result->setDocument($document);
+				$result->setNode($this->nodeRepository->findOneByIdentifier($document->getField($this->settings['Schema']['DocumentIdentifierField'])->getValue(), $workspace));
 				return $result;
 			}
 		}

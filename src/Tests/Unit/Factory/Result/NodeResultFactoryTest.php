@@ -33,7 +33,8 @@ class NodeResultFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 		$workspaceMock = $this->getMockBuilder('\TYPO3\TYPO3CR\Domain\Model\Workspace')->disableOriginalConstructor()->getMock();
 		$configuration = array();
 		$configuration['Schema']['DocumentIdentifierField'] = "id";
-		$this->assertEquals(null, $this->nodeResultFactory->createResultFromNodeDocument($document, $workspaceMock, $configuration));
+		$this->inject($this->nodeResultFactory, 'settings', $configuration);
+		$this->assertEquals(null, $this->nodeResultFactory->createResultFromNodeDocument($document, $workspaceMock));
 	}
 
 	public function testCreateResultFromNodeDocumentNotFoundPageNode(){
@@ -48,11 +49,17 @@ class NodeResultFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 
 		$configuration = array();
 		$configuration['Schema']['DocumentIdentifierField'] = "id";
+		$this->inject($this->nodeResultFactory, 'settings', $configuration);
 
-		$this->assertEquals(null, $this->nodeResultFactory->createResultFromNodeDocument($document, $workspaceMock, $configuration));
+		$this->assertEquals(null, $this->nodeResultFactory->createResultFromNodeDocument($document, $workspaceMock));
 	}
 
 	public function testCreateResultFromNodeDocumentWithFoundPageNode(){
+
+		$nodeRepositoryMock = $this->getMockBuilder('\TYPO3\TYPO3CR\Domain\Repository\NodeRepository', array('findOneByIdentifier'))->disableOriginalConstructor()->getMock();
+		$nodeRepositoryMock->expects($this->any())->method('findOneByIdentifier')->will($this->returnValue(null));
+		$this->inject($this->nodeResultFactory, 'nodeRepository', $nodeRepositoryMock);
+
 		$nodeMock = $this->getSingleNode('name');
 		$nodeServiceMock = $this->getMockBuilder('\Com\TechDivision\Neos\Search\Service\NodeService', array('getPageNodeByNodeIdentifier'))->disableOriginalConstructor()->getMock();
 		$nodeServiceMock->expects($this->any())->method('getPageNodeByNodeIdentifier')->will($this->returnValue($nodeMock));
@@ -66,12 +73,13 @@ class NodeResultFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 
 		$configuration = array();
 		$configuration['Schema']['DocumentIdentifierField'] = "id";
+		$this->inject($this->nodeResultFactory, 'settings', $configuration);
 
 		$result = new \Com\TechDivision\Neos\Search\Domain\Model\Result();
-		$result->setNode($nodeMock);
+		$result->setPageNode($nodeMock);
 		$result->setDocument($document);
 
-		$this->assertEquals($result, $this->nodeResultFactory->createResultFromNodeDocument($document, $workspaceMock, $configuration));
+		$this->assertEquals($result, $this->nodeResultFactory->createResultFromNodeDocument($document, $workspaceMock));
 	}
 }
 ?>

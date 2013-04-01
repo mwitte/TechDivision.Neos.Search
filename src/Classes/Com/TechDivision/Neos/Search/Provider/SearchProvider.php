@@ -38,16 +38,16 @@ class SearchProvider {
 	protected $resultFactory;
 
 	/**
-	 * @var \TYPO3\TYPO3CR\Domain\Repository\NodeRepository
-	 * @Flow\Inject
-	 */
-	protected $nodeRepository;
-
-	/**
 	 * @var \TYPO3\TYPO3CR\Domain\Repository\WorkspaceRepository
 	 * @Flow\Inject
 	 */
 	protected $workspaceRepository;
+
+	/**
+	 * @var \Com\TechDivision\Neos\Search\Factory\DocumentFactoryInterface
+	 * @Flow\Inject
+	 */
+	protected $documentFactory;
 
 	/**
 	 * @param $token
@@ -57,12 +57,12 @@ class SearchProvider {
 		$fieldFactory = new \Com\TechDivision\Neos\Search\Factory\FieldFactory();
 		$query = $this->searchProvider->searchByString(
 			$token,
-			$fieldFactory->createFromMultipleConfigurations($this->settings['Schema'], $this->settings['Schema']['FieldNames']),
+			$fieldFactory->createFromMultipleConfigurations(),
 			$rows,
 			$offset);
 		return $this->resultFactory->createMultipleFromDocuments(
 			$query,
-			$this->workspaceRepository->findByName('live')->getFirst(),
+			$this->getWorkspace(),
 			$this->settings);
 	}
 
@@ -70,20 +70,48 @@ class SearchProvider {
 	 * TODO to automate selective on edit of nodes by AOP
 	 */
 	public function updateAllDocuments(){
-		$nodes = $this->nodeRepository->findAll();
-		$documentFactory = new \Com\TechDivision\Neos\Search\Factory\DocumentFactory();
-		foreach($nodes as $node){
-			$document = $documentFactory->createFromNode(
-				$node,
-				$this->settings['Schema']
-			);
-			if($document){
+		// only if the provider has an index which can be filled
+		if($this->searchProvider->providerNeedsInputDocuments()){
+			$documents = $this->documentFactory->getAllDocuments($this->getWorkspace(), $this->settings);
+			foreach($documents as $document){
 				$this->searchProvider->addDocument($document);
 			}
 		}
+	}
 
+	public function updateDocument(\Com\TechDivision\Search\Document\Document $document){
+		// only if the provider has an index which can be filled
+		if($this->searchProvider->providerNeedsInputDocuments()){
+			$this->searchProvider->addDocument($document);
+		}
+	}
 
+	public function removeAllDocuments(){
+		// only if the provider has an index which can be filled
+		if($this->searchProvider->providerNeedsInputDocuments()){
+			$documents = $this->documentFactory->getAllDocuments($this->getWorkspace(), $this->settings);
+			$docCount = 0;
+			/** @var $document \Com\TechDivision\Search\Document\Document */
+			foreach($documents as $document){
+				$identifierField = $document->getField($this->settings['Schema']['DocumentIdentifierField']);
+				if($identifierField){
+					$this->searchProvider->removeDocumentByIdentifier($identifierField->getValue());
+					$docCount++;
+				}
+			}
+			return $docCount;
+		}
+	}
 
+	public function providerNeedsInputDocuments(){
+		return $this->searchProvider->providerNeedsInputDocuments();
+	}
+
+	/**
+	 * @return \TYPO3\TYPO3CR\Domain\Model\Workspace|NULL
+	 */
+	protected function getWorkspace(){
+		return $this->workspaceRepository->findByName($this->settings['Workspace'])->getFirst();
 	}
 }
 ?>

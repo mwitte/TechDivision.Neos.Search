@@ -8,7 +8,7 @@ class SearchProviderTest extends \TYPO3\Flow\Tests\FunctionalTestCase {
 	/**
 	 * @var boolean
 	 */
-	static protected $testablePersistenceEnabled = TRUE;
+	static protected $testablePersistenceEnabled = FALSE;
 
 	/**
 	 * @var \Com\TechDivision\Neos\Search\Provider\SearchProvider
@@ -22,10 +22,6 @@ class SearchProviderTest extends \TYPO3\Flow\Tests\FunctionalTestCase {
 
 	public function testSearchWithoutResult(){
 		$this->assertSame(array(), $this->provider->search('unFindAbleUn1queString'));
-	}
-
-	public function testUpdateAllDocuments(){
-		$this->assertEquals(null, $this->provider->updateAllDocuments());
 	}
 }
 ?>

@@ -28,7 +28,7 @@ class ResultFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	/**
 	 * @var \Com\TechDivision\Neos\Search\Domain\Model\Result
 	 */
-	protected $result;
+	protected $request;
 
 	public function setUp(){
 		parent::setUp();
@@ -36,19 +36,21 @@ class ResultFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 		$this->document = new \Com\TechDivision\Search\Document\Document();
 		$this->configuration = array(
 			'Schema' => array(
+				'PageNodeIdentifier' => 'pageId',
 				'DocumentTypeField' => 'contentType'
 			)
 		);
 		$this->workspaceMock = $this->getMockBuilder('\TYPO3\TYPO3CR\Domain\Model\Workspace')->disableOriginalConstructor()->getMock();
 
 		$nodeResultFactory = $this->getMockBuilder('\Com\TechDivision\Neos\Search\Factory\Result\NodeResultFactory', array('createResultFromNodeDocument'))->disableOriginalConstructor()->getMock();
-		$this->result = new \Com\TechDivision\Neos\Search\Domain\Model\Result();
-		$nodeResultFactory->expects($this->any())->method('createResultFromNodeDocument')->will($this->returnValue($this->result));
+		$this->request = new \Com\TechDivision\Neos\Search\Domain\Model\Result();
+		$nodeResultFactory->expects($this->any())->method('createResultFromNodeDocument')->will($this->returnValue($this->request));
 		$this->inject($this->resultFactory, 'nodeResultFactory', $nodeResultFactory);
+		$this->inject($this->resultFactory, 'settings', $this->configuration);
 	}
 
 	public function testCreateFromDocumentWithoutField(){
-		$this->assertSame(null, $this->resultFactory->createFromDocument($this->document, $this->workspaceMock, $this->configuration));
+		$this->assertSame(null, $this->resultFactory->createFromDocument($this->document, $this->workspaceMock));
 	}
 
 	/**
@@ -57,7 +59,7 @@ class ResultFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	public function testCreateFromDocumentWithFieldWrongValue(){
 		$field = new \Com\TechDivision\Search\Field\Field('contentType', 'wrongValue');
 		$this->document->addField($field);
-		$this->assertSame(null, $this->resultFactory->createFromDocument($this->document, $this->workspaceMock, $this->configuration));
+		$this->assertSame(null, $this->resultFactory->createFromDocument($this->document, $this->workspaceMock));
 	}
 
 	/**
@@ -66,11 +68,11 @@ class ResultFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	public function testCreateFromDocumentWithValidDocument(){
 		$field = new \Com\TechDivision\Search\Field\Field('contentType', 'T3CRNode');
 		$this->document->addField($field);
-		$this->assertSame($this->result, $this->resultFactory->createFromDocument($this->document, $this->workspaceMock, $this->configuration));
+		$this->assertSame($this->request, $this->resultFactory->createFromDocument($this->document, $this->workspaceMock));
 	}
 
 	public function testCreateMultipleWithoutDocuments(){
-		$this->assertSame(array(), $this->resultFactory->createMultipleFromDocuments(array(), $this->workspaceMock, $this->configuration));
+		$this->assertSame(array(), $this->resultFactory->createMultipleFromDocuments(array(), $this->workspaceMock));
 	}
 
 	/**
@@ -78,7 +80,7 @@ class ResultFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	 */
 	public function testCreateMultipleWithWrongDocument(){
 		$documents = array($this->document);
-		$this->assertSame(array(), $this->resultFactory->createMultipleFromDocuments($documents, $this->workspaceMock, $this->configuration));
+		$this->assertSame(array(), $this->resultFactory->createMultipleFromDocuments($documents, $this->workspaceMock));
 	}
 
 	/**
@@ -87,8 +89,9 @@ class ResultFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	public function testCreateMultipleWithValidDocument(){
 		$field = new \Com\TechDivision\Search\Field\Field('contentType', 'T3CRNode');
 		$this->document->addField($field);
+		$this->document->addField(new \Com\TechDivision\Search\Field\Field('pageId', ''));
 		$documents = array($this->document);
-		$this->assertSame(array($this->result), $this->resultFactory->createMultipleFromDocuments($documents, $this->workspaceMock, $this->configuration));
+		$this->assertSame(array($this->request), $this->resultFactory->createMultipleFromDocuments($documents, $this->workspaceMock));
 	}
 }
 ?>

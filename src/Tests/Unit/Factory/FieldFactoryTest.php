@@ -57,34 +57,47 @@ class FieldFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	public function testCreateFromMultipleConfigurations(){
 		$fields = array(
 			new \Com\TechDivision\Search\Field\Field('myFieldName', ''),
-			new \Com\TechDivision\Search\Field\Field('myOtherFieldName', '')
+			new \Com\TechDivision\Search\Field\Field('myOtherFieldName', ''),
+			new \Com\TechDivision\Search\Field\Field('category', 'T3CRNode'),
+			new \Com\TechDivision\Search\Field\Field('id', ''),
+			new \Com\TechDivision\Search\Field\Field('pageId', '')
 		);
 		$configurations = array(
-			'T3CRNode' => array(
-				'x' => array(
-					'properties' =>
-					array(
-						'propertyName' => array(
-							'fieldName' => 'myFieldNameAlias'
-						)
-					),
-				),
-				'y' => array(
-					'properties' =>
-					array(
-						'otherPropertyName' => array(
-							'fieldName' => 'myOtherFieldNameAlias'
+			'Schema' => array(
+				'DocumentIdentifierField' => 'id',
+				'PageNodeIdentifier' => 'pageId',
+				'DocumentTypeField' => 'category',
+				'DocumentTypes' => array(
+					'T3CRNode' => array(
+						'ContentTypes' => array(
+							'x' => array(
+								'properties' =>
+								array(
+									'propertyName' => array(
+										'fieldName' => 'myFieldNameAlias'
+									)
+								),
+							),
+							'y' => array(
+								'properties' =>
+								array(
+									'otherPropertyName' => array(
+										'fieldName' => 'myOtherFieldNameAlias'
+									)
+								)
+							)
 						)
 					)
+				),
+				'FieldNames' => array(
+					'myFieldNameAlias' => 'myFieldName',
+					'myOtherFieldNameAlias' => 'myOtherFieldName'
 				)
 			)
 		);
-		$fieldNames = array(
-			'myFieldNameAlias' => 'myFieldName',
-			'myOtherFieldNameAlias' => 'myOtherFieldName'
-		);
 
-		$this->assertEquals($fields, $this->fieldFactory->createFromMultipleConfigurations($configurations, $fieldNames));
+		$this->inject($this->fieldFactory, 'settings', $configurations);
+		$this->assertEquals($fields, $this->fieldFactory->createFromMultipleConfigurations());
 	}
 
 	public function testCreateFromNodeWithWrongName(){

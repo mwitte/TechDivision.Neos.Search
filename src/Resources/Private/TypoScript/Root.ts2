@@ -1,0 +1,6 @@
+prototype(Com.TechDivision.Neos.Search:SearchPlugin) < prototype(TYPO3.Neos.ContentTypes:Plugin)
+prototype(Com.TechDivision.Neos.Search:SearchPlugin) {
+     package = 'Com.TechDivision.Neos.Search'
+     controller = 'Plugin'
+     action = 'show'
+}

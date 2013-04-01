@@ -31,6 +31,15 @@ class TDNeosSearchCommandController extends \TYPO3\Flow\Cli\CommandController {
 	}
 
 	/**
+	 * Removes all configured Nodes from searchIndex
+	 *
+	 * @return void
+	 */
+	public function removeAllDocumentsCommand(){
+		$this->outputLine('Removed Docs: %s', array($this->searchProvider->removeAllDocuments()));
+	}
+
+	/**
 	 * Search with token
 	 *
 	 * @return void
@@ -52,7 +61,7 @@ class TDNeosSearchCommandController extends \TYPO3\Flow\Cli\CommandController {
 		$this->outputLine('Found %s documents:', array(count($results)));
 		/** @var $result \Com\TechDivision\Neos\Search\Domain\Model\Result */
 		foreach($results as $result){
-			$this->outputLine('Page: %s', array($result->getNode()->getProperty('title')));
+			$this->outputLine('Page: %s', array($result->getPageNode()->getProperty('title')));
 			$document = $result->getDocument();
 			$fields = $document->getFields();
 			/** @var $field \Com\TechDivision\Search\Field\FieldInterface */

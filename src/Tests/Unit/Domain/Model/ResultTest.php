@@ -14,23 +14,29 @@ class ResultTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	/**
 	 * @var \Com\TechDivision\Neos\Search\Domain\Model\Result
 	 */
-	protected $result;
+	protected $request;
 
 	public function setUp(){
 		parent::setUp();
-		$this->result = new \Com\TechDivision\Neos\Search\Domain\Model\Result();
+		$this->request = new \Com\TechDivision\Neos\Search\Domain\Model\Result();
 	}
 
-	public function testSetGetNode(){
+	public function testSetGetPageNode(){
 		$nodeMock = $this->getMockBuilder('\TYPO3\TYPO3CR\Domain\Model\Node', array())->disableOriginalConstructor()->getMock();
-		$this->result->setNode($nodeMock);
-		$this->assertSame($nodeMock, $this->result->getNode($nodeMock));
+		$this->request->setPageNode($nodeMock);
+		$this->assertSame($nodeMock, $this->request->getPageNode($nodeMock));
 	}
 
 	public function testSetGetDocument(){
 		$document = new \Com\TechDivision\Search\Document\Document();
-		$this->result->setDocument($document);
-		$this->assertSame($document, $this->result->getDocument());
+		$this->request->setDocument($document);
+		$this->assertSame($document, $this->request->getDocument());
+	}
+
+	public function testSetGetNode(){
+		$nodeMock = $this->getMockBuilder('\TYPO3\TYPO3CR\Domain\Model\Node', array())->disableOriginalConstructor()->getMock();
+		$this->request->setNode($nodeMock);
+		$this->assertSame($nodeMock, $this->request->getNode());
 	}
 }
 ?>
