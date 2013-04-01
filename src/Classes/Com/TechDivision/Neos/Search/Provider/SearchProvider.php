@@ -128,5 +128,12 @@ class SearchProvider {
 	protected function getWorkspace(){
 		return $this->workspaceRepository->findByName($this->settings['Workspace'])->getFirst();
 	}
+
+	/**
+	 * @return bool
+	 */
+	public function providerNeedsInputDocuments(){
+		return $this->provider->providerNeedsInputDocuments();
+	}
 }
 ?>

@@ -148,5 +148,11 @@ class SearchProviderTest extends \TYPO3\Flow\Tests\UnitTestCase {
 		);
 		$this->assertSame(1, $this->searchProvider->removeAllDocuments());
 	}
+
+	public function testProviderNeedsInputDocuments(){
+		$this->providerMock->expects($this->any())->method('providerNeedsInputDocuments')->will($this->returnValue(true));
+		$this->inject($this->searchProvider, 'provider', $this->providerMock);
+		$this->assertSame(true, $this->searchProvider->providerNeedsInputDocuments());
+	}
 }
 ?>
