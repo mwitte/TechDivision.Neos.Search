@@ -1,12 +1,14 @@
 {namespace t=TYPO3\Neos\ViewHelpers}
-<f:for each="{results}" as="result">
-    <div>
-        <h2><t:link.node node="{result.pageNode}">{result.pageNode.label}</t:link.node></h2>
-        <f:for each="{result.document.fields}" as="field">
-            <p>
-                <b>{field.name}:</b>
-                {field.value -> f:format.stripTags()}
-            </p>
-        </f:for>
-    </div>
-</f:for>
+<div>
+    <h2>Search results:</h2>
+    <f:for each="{searchResults}" as="result">
+        <f:if condition="{settings.DetailResults}">
+            <f:then>
+                <f:render partial="Result/Detail" arguments="{result: result, request: searchRequest}"/>
+            </f:then>
+            <f:else>
+                <f:render partial="Result/Regular" arguments="{result: result, request: searchRequest}"/>
+            </f:else>
+        </f:if>
+    </f:for>
+</div>

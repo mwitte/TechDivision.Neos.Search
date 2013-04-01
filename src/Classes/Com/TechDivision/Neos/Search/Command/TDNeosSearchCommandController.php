@@ -2,9 +2,14 @@
 namespace Com\TechDivision\Neos\Search\Command;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Com.TechDivision.Neos.Search".*
+ * This belongs to the TYPO3 Flow package "Com.TechDivision.Neos.Search"  *
  *                                                                        *
- *                                                                        */
+ * It is free software; you can redistribute it and/or modify it under    *
+ * the terms of the GNU General Public License, either version 3 of the   *
+ * License, or (at your option) any later version.                        *
+ *                                                                        *
+ * Copyright (C) 2013 Matthias Witte                                      *
+ * http://www.matthias-witte.net                                          */
 
 use TYPO3\Flow\Annotations as Flow;
 
@@ -58,7 +63,6 @@ class TDNeosSearchCommandController extends \TYPO3\Flow\Cli\CommandController {
 
 		$this->outputLine('Searching for "%s"', array($searchToken));
 		$results = $this->searchProvider->search($searchToken);
-		$this->outputLine('Found %s documents:', array(count($results)));
 		/** @var $result \Com\TechDivision\Neos\Search\Domain\Model\Result */
 		foreach($results as $result){
 			$this->outputLine('Page: %s', array($result->getPageNode()->getProperty('title')));
@@ -71,7 +75,7 @@ class TDNeosSearchCommandController extends \TYPO3\Flow\Cli\CommandController {
 			$this->outputLine('');
 			$this->outputLine('');
 		}
-		$this->outputLine('Found %s documents:', array(count($results)));
+		$this->outputLine('%s document(s) found', array(count($results)));
 	}
 
 }

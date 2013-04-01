@@ -2,6 +2,15 @@
 
 namespace Com\TechDivision\Search\Tests\Unit\Field;
 
+/*                                                                        *
+ * This belongs to the TYPO3 Flow package "Com.TechDivision.Neos.Search"  *
+ *                                                                        *
+ * It is free software; you can redistribute it and/or modify it under    *
+ * the terms of the GNU General Public License, either version 3 of the   *
+ * License, or (at your option) any later version.                        *
+ *                                                                        *
+ * Copyright (C) 2013 Matthias Witte                                      *
+ * http://www.matthias-witte.net                                          */
 
 class FieldFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 
@@ -33,7 +42,7 @@ class FieldFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	 */
 	public function testCreateFromConfigurationWithFieldNameNotMatchingFieldnames(){
 		$this->assertEquals(null, $this->fieldFactory->createFromConfiguration(
-			array('fieldName' => 'myFieldNameAlias'),
+			array('fieldAlias' => 'myFieldNameAlias'),
 			array('otherAlias' => 'myFieldName'),
 			'test')
 		);
@@ -45,7 +54,7 @@ class FieldFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	public function testCreateFromConfigurationWithFieldName(){
 		$field = new \Com\TechDivision\Search\Field\Field('myFieldName', '');
 		$this->assertEquals($field, $this->fieldFactory->createFromConfiguration(
-			array('fieldName' => 'myFieldNameAlias'),
+			array('fieldAlias' => 'myFieldNameAlias'),
 			array('myFieldNameAlias' => 'myFieldName'),
 			'test')
 		);
@@ -58,7 +67,7 @@ class FieldFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 		$fields = array(
 			new \Com\TechDivision\Search\Field\Field('myFieldName', ''),
 			new \Com\TechDivision\Search\Field\Field('myOtherFieldName', ''),
-			new \Com\TechDivision\Search\Field\Field('category', 'T3CRNode'),
+			new \Com\TechDivision\Search\Field\Field('category', 'TYPO3-TYPO3CR-Domain-Model-Node'),
 			new \Com\TechDivision\Search\Field\Field('id', ''),
 			new \Com\TechDivision\Search\Field\Field('pageId', '')
 		);
@@ -68,13 +77,13 @@ class FieldFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 				'PageNodeIdentifier' => 'pageId',
 				'DocumentTypeField' => 'category',
 				'DocumentTypes' => array(
-					'T3CRNode' => array(
+					'TYPO3-TYPO3CR-Domain-Model-Node' => array(
 						'ContentTypes' => array(
 							'x' => array(
 								'properties' =>
 								array(
 									'propertyName' => array(
-										'fieldName' => 'myFieldNameAlias'
+										'fieldAlias' => 'myFieldNameAlias'
 									)
 								),
 							),
@@ -82,14 +91,14 @@ class FieldFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 								'properties' =>
 								array(
 									'otherPropertyName' => array(
-										'fieldName' => 'myOtherFieldNameAlias'
+										'fieldAlias' => 'myOtherFieldNameAlias'
 									)
 								)
 							)
 						)
 					)
 				),
-				'FieldNames' => array(
+				'FieldAliases' => array(
 					'myFieldNameAlias' => 'myFieldName',
 					'myOtherFieldNameAlias' => 'myOtherFieldName'
 				)
@@ -120,7 +129,7 @@ class FieldFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 		$nodeMock = $this->getNodeMockWithProperty('name', 'awesomeValue');
 		$field = new \Com\TechDivision\Search\Field\Field('text', 'awesomeValue');
 		$this->assertEquals($field, $this->fieldFactory->createFromNode(
-			array('fieldName' => 'textAlias'),
+			array('fieldAlias' => 'textAlias'),
 			array('textAlias' => 'text'),
 			'name',
 			$nodeMock)
@@ -134,7 +143,7 @@ class FieldFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 		$nodeMock = $this->getNodeMockWithProperty('name', 'awesomeValue');
 		$field = new \Com\TechDivision\Search\Field\Field('text', 'awesomeValue', 1.7);
 		$this->assertEquals($field, $this->fieldFactory->createFromNode(
-			array('fieldName' => 'textAlias', 'fieldBoost' => 1.7),
+			array('fieldAlias' => 'textAlias', 'fieldBoost' => 1.7),
 			array('textAlias' => 'text'),
 			'name', $nodeMock)
 		);

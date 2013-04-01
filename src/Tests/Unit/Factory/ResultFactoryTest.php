@@ -2,6 +2,15 @@
 
 namespace Com\TechDivision\Search\Tests\Unit\Field;
 
+/*                                                                        *
+ * This belongs to the TYPO3 Flow package "Com.TechDivision.Neos.Search"  *
+ *                                                                        *
+ * It is free software; you can redistribute it and/or modify it under    *
+ * the terms of the GNU General Public License, either version 3 of the   *
+ * License, or (at your option) any later version.                        *
+ *                                                                        *
+ * Copyright (C) 2013 Matthias Witte                                      *
+ * http://www.matthias-witte.net                                          */
 
 class ResultFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 
@@ -66,7 +75,7 @@ class ResultFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	 * @depends testCreateFromDocumentWithFieldWrongValue
 	 */
 	public function testCreateFromDocumentWithValidDocument(){
-		$field = new \Com\TechDivision\Search\Field\Field('contentType', 'T3CRNode');
+		$field = new \Com\TechDivision\Search\Field\Field('contentType', 'TYPO3-TYPO3CR-Domain-Model-Node');
 		$this->document->addField($field);
 		$this->assertSame($this->request, $this->resultFactory->createFromDocument($this->document, $this->workspaceMock));
 	}
@@ -87,7 +96,7 @@ class ResultFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	 * @depends testCreateMultipleWithoutDocuments
 	 */
 	public function testCreateMultipleWithValidDocument(){
-		$field = new \Com\TechDivision\Search\Field\Field('contentType', 'T3CRNode');
+		$field = new \Com\TechDivision\Search\Field\Field('contentType', 'TYPO3-TYPO3CR-Domain-Model-Node');
 		$this->document->addField($field);
 		$this->document->addField(new \Com\TechDivision\Search\Field\Field('pageId', ''));
 		$documents = array($this->document);

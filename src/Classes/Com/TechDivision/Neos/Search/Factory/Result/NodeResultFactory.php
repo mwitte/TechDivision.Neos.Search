@@ -1,13 +1,22 @@
 <?php
 namespace Com\TechDivision\Neos\Search\Factory\Result;
 
+/*                                                                        *
+ * This belongs to the TYPO3 Flow package "Com.TechDivision.Neos.Search"  *
+ *                                                                        *
+ * It is free software; you can redistribute it and/or modify it under    *
+ * the terms of the GNU General Public License, either version 3 of the   *
+ * License, or (at your option) any later version.                        *
+ *                                                                        *
+ * Copyright (C) 2013 Matthias Witte                                      *
+ * http://www.matthias-witte.net                                          */
+
 use TYPO3\Flow\Annotations as Flow;
 use TYPO3\TYPO3CR\Domain\Model\Node;
 use Com\TechDivision\Search\Document\Document;
 use Com\TechDivision\Neos\Search\Domain\Model\Result;
 
 /**
- *
  * @Flow\Scope("singleton")
  */
 class NodeResultFactory{

@@ -2,6 +2,15 @@
 
 namespace Com\TechDivision\Search\Tests\Unit\Field;
 
+/*                                                                        *
+ * This belongs to the TYPO3 Flow package "Com.TechDivision.Neos.Search"  *
+ *                                                                        *
+ * It is free software; you can redistribute it and/or modify it under    *
+ * the terms of the GNU General Public License, either version 3 of the   *
+ * License, or (at your option) any later version.                        *
+ *                                                                        *
+ * Copyright (C) 2013 Matthias Witte                                      *
+ * http://www.matthias-witte.net                                          */
 
 class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 
@@ -30,12 +39,12 @@ class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 				'PageNodeIdentifier' => 'subject',
 				'DocumentTypeField' => 'cat',
 				'DocumentTypes' => array(
-					'T3CRNode' => array(
+					'TYPO3-TYPO3CR-Domain-Model-Node' => array(
 						'ContentTypes' => array(
 							'MyContentType' => array(
 								'properties' => array(
 									'text' => array(
-										'fieldName' => 'textAlias',
+										'fieldAlias' => 'textAlias',
 										'fieldValue' => 'value'
 									)
 								)
@@ -43,7 +52,7 @@ class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 						)
 					)
 				),
-				'FieldNames' => array(
+				'FieldAliases' => array(
 					'textAlias' => 'text'
 				),
 				'DocumentIdentifierField' => 'id'
@@ -71,11 +80,11 @@ class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 		$configuration = array(
 			'Schema' => array(
 				'DocumentTypes' => array(
-					'T3CRNode' => array(
+					'TYPO3-TYPO3CR-Domain-Model-Node' => array(
 						'ContentTypes' => array()
 					)
 				),
-				'FieldNames' => array(),
+				'FieldAliases' => array(),
 				'DocumentIdentifierField' => 'id'
 			)
 		);
@@ -91,13 +100,13 @@ class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 		$configuration = array(
 			'Schema' => array(
 				'DocumentTypes' => array(
-					'T3CRNode' => array(
+					'TYPO3-TYPO3CR-Domain-Model-Node' => array(
 						'ContentTypes' => array(
 							'OtherContentType' => null
 						)
 					)
 				),
-				'FieldNames' => array(),
+				'FieldAliases' => array(),
 				'DocumentIdentifierField' => 'id'
 			)
 		);
@@ -113,7 +122,7 @@ class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 		$configuration = array(
 			'Schema' => array(
 				'DocumentTypes' => array(
-					'T3CRNode' => array(
+					'TYPO3-TYPO3CR-Domain-Model-Node' => array(
 						'ContentTypes' => array(
 							'MyContentType' => array(
 								'properties' => null
@@ -121,7 +130,7 @@ class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 						)
 					)
 				),
-				'FieldNames' => array(),
+				'FieldAliases' => array(),
 				'DocumentIdentifierField' => 'id'
 			)
 		);
@@ -136,7 +145,7 @@ class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 		$nodeMock = $this->getNodeMockWithProperty('MyContentType', 'text', 'myValue', 21);
 
 		// remove the matching fieldName
-		unset($this->completeConfiguration['Schema']['FieldNames']['textAlias']);
+		unset($this->completeConfiguration['Schema']['FieldAliases']['textAlias']);
 
 		$field = new \Com\TechDivision\Search\Field\Field('text', 'myValue');
 		$document = new \Com\TechDivision\Search\Document\Document();
@@ -162,7 +171,7 @@ class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 		$document = new \Com\TechDivision\Search\Document\Document();
 		$document->addField($field);
 		$document->addField(new \Com\TechDivision\Search\Field\Field('id', 21));
-		$document->addField(new \Com\TechDivision\Search\Field\Field($this->completeConfiguration['Schema']['DocumentTypeField'], 'T3CRNode'));
+		$document->addField(new \Com\TechDivision\Search\Field\Field($this->completeConfiguration['Schema']['DocumentTypeField'], 'TYPO3-TYPO3CR-Domain-Model-Node'));
 		$document->addField(new \Com\TechDivision\Search\Field\Field('subject', 21));
 		$this->inject($this->nodeDocumentFactory, 'settings', $this->completeConfiguration);
 		$this->assertEquals($document, $this->nodeDocumentFactory->createFromNode($nodeMock, $this->workspaceMock));
@@ -181,12 +190,12 @@ class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 
 		$nodeMock = $this->getNodeMockWithProperty('MyContentType', 'text', 'myValue', 21);
 		// modify configuration
-		$this->completeConfiguration['Schema']['DocumentTypes']['T3CRNode']['ContentTypes']['MyContentType']['documentBoost'] = 1.35;
+		$this->completeConfiguration['Schema']['DocumentTypes']['TYPO3-TYPO3CR-Domain-Model-Node']['ContentTypes']['MyContentType']['documentBoost'] = 1.35;
 
 		$document = new \Com\TechDivision\Search\Document\Document();
 		$document->addField(new \Com\TechDivision\Search\Field\Field('text', 'myValue'));
 		$document->addField(new \Com\TechDivision\Search\Field\Field('id', 21));
-		$document->addField(new \Com\TechDivision\Search\Field\Field($this->completeConfiguration['Schema']['DocumentTypeField'], 'T3CRNode'));
+		$document->addField(new \Com\TechDivision\Search\Field\Field($this->completeConfiguration['Schema']['DocumentTypeField'], 'TYPO3-TYPO3CR-Domain-Model-Node'));
 		$document->addField(new \Com\TechDivision\Search\Field\Field('subject', 21));
 		$document->setBoost(1.35);
 		$this->inject($this->nodeDocumentFactory, 'settings', $this->completeConfiguration);
@@ -220,12 +229,12 @@ class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 		$document = new \Com\TechDivision\Search\Document\Document();
 		$document->addField(new \Com\TechDivision\Search\Field\Field('text', 'myValue'));
 		$document->addField(new \Com\TechDivision\Search\Field\Field('id', 21));
-		$document->addField(new \Com\TechDivision\Search\Field\Field($this->completeConfiguration['Schema']['DocumentTypeField'], 'T3CRNode'));
+		$document->addField(new \Com\TechDivision\Search\Field\Field($this->completeConfiguration['Schema']['DocumentTypeField'], 'TYPO3-TYPO3CR-Domain-Model-Node'));
 		$document->addField(new \Com\TechDivision\Search\Field\Field('subject', 21));
 		$document->setBoost(1.35);
 
 		// modify configuration
-		$this->completeConfiguration['Schema']['DocumentTypes']['T3CRNode']['ContentTypes']['MyContentType']['documentBoost'] = 1.35;
+		$this->completeConfiguration['Schema']['DocumentTypes']['TYPO3-TYPO3CR-Domain-Model-Node']['ContentTypes']['MyContentType']['documentBoost'] = 1.35;
 		$this->inject($this->nodeDocumentFactory, 'settings', $this->completeConfiguration);
 
 

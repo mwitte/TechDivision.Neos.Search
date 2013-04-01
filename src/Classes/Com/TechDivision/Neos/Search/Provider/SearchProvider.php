@@ -1,11 +1,19 @@
 <?php
 namespace Com\TechDivision\Neos\Search\Provider;
 
+/*                                                                        *
+ * This belongs to the TYPO3 Flow package "Com.TechDivision.Neos.Search"  *
+ *                                                                        *
+ * It is free software; you can redistribute it and/or modify it under    *
+ * the terms of the GNU General Public License, either version 3 of the   *
+ * License, or (at your option) any later version.                        *
+ *                                                                        *
+ * Copyright (C) 2013 Matthias Witte                                      *
+ * http://www.matthias-witte.net                                          */
+
 use TYPO3\Flow\Annotations as Flow;
 
 /**
- * This is my great class.
- *
  * @Flow\Scope("singleton")
  */
 class SearchProvider {
@@ -29,7 +37,7 @@ class SearchProvider {
 	 * @var \Com\TechDivision\Search\Provider\ProviderInterface
 	 * @Flow\Inject
 	 */
-	protected $searchProvider;
+	protected $provider;
 
 	/**
 	 * @var \Com\TechDivision\Neos\Search\Factory\ResultFactoryInterface
@@ -50,14 +58,19 @@ class SearchProvider {
 	protected $documentFactory;
 
 	/**
+	 * @var \Com\TechDivision\Neos\Search\Factory\FieldFactory
+	 * @Flow\Inject
+	 */
+	protected $fieldFactory;
+
+	/**
 	 * @param $token
 	 * @return array with \Com\TechDivision\Search\Document\DocumentInterface
 	 */
 	public function search($token, $rows = 50, $offset = 0){
-		$fieldFactory = new \Com\TechDivision\Neos\Search\Factory\FieldFactory();
-		$query = $this->searchProvider->searchByString(
+		$query = $this->provider->searchByString(
 			$token,
-			$fieldFactory->createFromMultipleConfigurations(),
+			$this->fieldFactory->createFromMultipleConfigurations(),
 			$rows,
 			$offset);
 		return $this->resultFactory->createMultipleFromDocuments(
@@ -71,40 +84,42 @@ class SearchProvider {
 	 */
 	public function updateAllDocuments(){
 		// only if the provider has an index which can be filled
-		if($this->searchProvider->providerNeedsInputDocuments()){
+		if($this->provider->providerNeedsInputDocuments()){
 			$documents = $this->documentFactory->getAllDocuments($this->getWorkspace(), $this->settings);
+			$amountUpdated = 0;
 			foreach($documents as $document){
-				$this->searchProvider->addDocument($document);
+				if($this->provider->addDocument($document)){
+					$amountUpdated++;
+				}
 			}
+			return $amountUpdated;
 		}
+		return null;
 	}
 
 	public function updateDocument(\Com\TechDivision\Search\Document\Document $document){
 		// only if the provider has an index which can be filled
-		if($this->searchProvider->providerNeedsInputDocuments()){
-			$this->searchProvider->addDocument($document);
+		if($this->provider->providerNeedsInputDocuments()){
+			return $this->provider->addDocument($document);
 		}
 	}
 
 	public function removeAllDocuments(){
 		// only if the provider has an index which can be filled
-		if($this->searchProvider->providerNeedsInputDocuments()){
+		if($this->provider->providerNeedsInputDocuments()){
 			$documents = $this->documentFactory->getAllDocuments($this->getWorkspace(), $this->settings);
 			$docCount = 0;
 			/** @var $document \Com\TechDivision\Search\Document\Document */
 			foreach($documents as $document){
 				$identifierField = $document->getField($this->settings['Schema']['DocumentIdentifierField']);
 				if($identifierField){
-					$this->searchProvider->removeDocumentByIdentifier($identifierField->getValue());
+					$this->provider->removeDocumentByIdentifier($identifierField->getValue());
 					$docCount++;
 				}
 			}
 			return $docCount;
 		}
-	}
-
-	public function providerNeedsInputDocuments(){
-		return $this->searchProvider->providerNeedsInputDocuments();
+		return null;
 	}
 
 	/**
