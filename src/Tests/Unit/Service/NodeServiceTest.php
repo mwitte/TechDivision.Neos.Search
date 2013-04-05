@@ -1,9 +1,9 @@
 <?php
 
-namespace Com\TechDivision\Search\Tests\Unit\Field;
+namespace TechDivision\Search\Tests\Unit\Field;
 
 /*                                                                        *
- * This belongs to the TYPO3 Flow package "Com.TechDivision.Neos.Search"  *
+ * This belongs to the TYPO3 Flow package "TechDivision.Neos.Search"  *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU General Public License, either version 3 of the   *
@@ -20,7 +20,7 @@ class NodeServiceTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	protected $workspaceMock;
 
 	/**
-	 * @var \Com\TechDivision\Neos\Search\Service\NodeService
+	 * @var \TechDivision\Neos\Search\Service\NodeService
 	 */
 	protected $nodeService;
 
@@ -32,7 +32,7 @@ class NodeServiceTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	public function setUp(){
 		parent::setUp();
 		$this->workspaceMock = $this->getMockBuilder('\TYPO3\TYPO3CR\Domain\Model\Workspace')->disableOriginalConstructor()->getMock();
-		$this->nodeService = new \Com\TechDivision\Neos\Search\Service\NodeService();
+		$this->nodeService = new \TechDivision\Neos\Search\Service\NodeService();
 		$this->settings = array('ResultContentType' => 'TYPO3.Neos.ContentTypes:Page');
 	}
 
@@ -95,7 +95,7 @@ class NodeServiceTest extends \TYPO3\Flow\Tests\UnitTestCase {
 		// due recursive function, first call initialises first recursion, after second call return
 		$nodeRepositoryMock->expects($this->any())->method('findOneByIdentifier')->will($this->returnValue($this->getSingleNode('contentType', true, true)));
 
-		$nodeServiceMock = $this->getMock('\Com\TechDivision\Neos\Search\Service\NodeService', array('getPageNode'));
+		$nodeServiceMock = $this->getMock('\TechDivision\Neos\Search\Service\NodeService', array('getPageNode'));
 		$pageNodeMock = $this->getSingleNode('TYPO3.Neos.ContentTypes:Page', true, true);
 		$nodeServiceMock->expects($this->any())->method('getPageNode')->will($this->returnValue($pageNodeMock));
 

@@ -1,6 +1,5 @@
 <?php
-
-namespace TechDivision\Neos\Search\Tests\Functional\Provider;
+namespace TechDivision\Neos\Search\Factory;
 
 /*                                                                        *
  * This belongs to the TYPO3 Flow package "TechDivision.Neos.Search"  *
@@ -12,25 +11,29 @@ namespace TechDivision\Neos\Search\Tests\Functional\Provider;
  * Copyright (C) 2013 Matthias Witte                                      *
  * http://www.matthias-witte.net                                          */
 
-class SearchProviderTest extends \TYPO3\Flow\Tests\FunctionalTestCase {
+use TYPO3\Flow\Annotations as Flow;
+
+/**
+ * @Flow\Scope("singleton")
+ */
+class DocumentFactory implements DocumentFactoryInterface{
 
 	/**
-	 * @var boolean
+	 * @var \TechDivision\Neos\Search\Factory\Document\NodeDocumentFactory
+	 * @Flow\Inject
 	 */
-	static protected $testablePersistenceEnabled = FALSE;
+	protected $nodeDocumentFactory;
 
 	/**
-	 * @var \TechDivision\Neos\Search\Provider\SearchProvider
+	 * @param \TYPO3\TYPO3CR\Domain\Model\Workspace $workspace
+	 * @return array TechDivision\Search\Document\Document
 	 */
-	protected $provider;
-
-	public function setUp(){
-		parent::setUp();
-		$this->provider = $this->objectManager->get('\TechDivision\Neos\Search\Provider\SearchProvider');
-	}
-
-	public function testSearchWithoutResult(){
-		$this->assertSame(array(), $this->provider->search('unFindAbleUn1queString'));
+	public function getAllDocuments(\TYPO3\TYPO3CR\Domain\Model\Workspace $workspace)
+	{
+		$documents = array();
+		$documents = array_merge($documents, $this->nodeDocumentFactory->getAllDocuments($workspace));
+		return $documents;
 	}
 }
+
 ?>

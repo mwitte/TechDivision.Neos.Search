@@ -1,8 +1,8 @@
 <?php
-namespace Com\TechDivision\Neos\Search\Tests\Unit\Domain\Model;
+namespace TechDivision\Neos\Search\Tests\Unit\Domain\Model;
 
 /*                                                                        *
- * This belongs to the TYPO3 Flow package "Com.TechDivision.Neos.Search"  *
+ * This belongs to the TYPO3 Flow package "TechDivision.Neos.Search"  *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU General Public License, either version 3 of the   *
@@ -14,13 +14,13 @@ namespace Com\TechDivision\Neos\Search\Tests\Unit\Domain\Model;
 class ResultTest extends \TYPO3\Flow\Tests\UnitTestCase {
 
 	/**
-	 * @var \Com\TechDivision\Neos\Search\Domain\Model\Result
+	 * @var \TechDivision\Neos\Search\Domain\Model\Result
 	 */
 	protected $request;
 
 	public function setUp(){
 		parent::setUp();
-		$this->request = new \Com\TechDivision\Neos\Search\Domain\Model\Result();
+		$this->request = new \TechDivision\Neos\Search\Domain\Model\Result();
 	}
 
 	public function testSetGetPageNode(){
@@ -30,7 +30,7 @@ class ResultTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	}
 
 	public function testSetGetDocument(){
-		$document = new \Com\TechDivision\Search\Document\Document();
+		$document = new \TechDivision\Search\Document\Document();
 		$this->request->setDocument($document);
 		$this->assertSame($document, $this->request->getDocument());
 	}

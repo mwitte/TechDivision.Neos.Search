@@ -1,6 +1,5 @@
 <?php
-
-namespace TechDivision\Neos\Search\Tests\Functional\Provider;
+namespace TechDivision\Neos\Search\Domain\Model;
 
 /*                                                                        *
  * This belongs to the TYPO3 Flow package "TechDivision.Neos.Search"  *
@@ -12,25 +11,39 @@ namespace TechDivision\Neos\Search\Tests\Functional\Provider;
  * Copyright (C) 2013 Matthias Witte                                      *
  * http://www.matthias-witte.net                                          */
 
-class SearchProviderTest extends \TYPO3\Flow\Tests\FunctionalTestCase {
+use TYPO3\Flow\Annotations as Flow;
+
+/**
+ * A Request
+ *
+ */
+class Request {
 
 	/**
-	 * @var boolean
+	 * The token
+	 * @var string
 	 */
-	static protected $testablePersistenceEnabled = FALSE;
+	protected $token;
+
 
 	/**
-	 * @var \TechDivision\Neos\Search\Provider\SearchProvider
+	 * Get the Request's token
+	 *
+	 * @return string The Request's token
 	 */
-	protected $provider;
-
-	public function setUp(){
-		parent::setUp();
-		$this->provider = $this->objectManager->get('\TechDivision\Neos\Search\Provider\SearchProvider');
+	public function getToken() {
+		return $this->token;
 	}
 
-	public function testSearchWithoutResult(){
-		$this->assertSame(array(), $this->provider->search('unFindAbleUn1queString'));
+	/**
+	 * Sets this Request's token
+	 *
+	 * @param string $token The Request's token
+	 * @return void
+	 */
+	public function setToken($token) {
+		$this->token = $token;
 	}
+
 }
 ?>

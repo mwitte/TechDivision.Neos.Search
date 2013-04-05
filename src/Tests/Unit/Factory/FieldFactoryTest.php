@@ -1,9 +1,9 @@
 <?php
 
-namespace Com\TechDivision\Search\Tests\Unit\Field;
+namespace TechDivision\Search\Tests\Unit\Field;
 
 /*                                                                        *
- * This belongs to the TYPO3 Flow package "Com.TechDivision.Neos.Search"  *
+ * This belongs to the TYPO3 Flow package "TechDivision.Neos.Search"  *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU General Public License, either version 3 of the   *
@@ -15,13 +15,13 @@ namespace Com\TechDivision\Search\Tests\Unit\Field;
 class FieldFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 
 	/**
-	 * @var \Com\TechDivision\Neos\Search\Factory\FieldFactory
+	 * @var \TechDivision\Neos\Search\Factory\FieldFactory
 	 */
 	protected $fieldFactory;
 
 	public function setUp(){
 		parent::setUp();
-		$this->fieldFactory = new \Com\TechDivision\Neos\Search\Factory\FieldFactory();
+		$this->fieldFactory = new \TechDivision\Neos\Search\Factory\FieldFactory();
 
 	}
 
@@ -52,7 +52,7 @@ class FieldFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	 * @depends testCreateFromEmptyConfiguration
 	 */
 	public function testCreateFromConfigurationWithFieldName(){
-		$field = new \Com\TechDivision\Search\Field\Field('myFieldName', '');
+		$field = new \TechDivision\Search\Field\Field('myFieldName', '');
 		$this->assertEquals($field, $this->fieldFactory->createFromConfiguration(
 			array('fieldAlias' => 'myFieldNameAlias'),
 			array('myFieldNameAlias' => 'myFieldName'),
@@ -65,11 +65,11 @@ class FieldFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	 */
 	public function testCreateFromMultipleConfigurations(){
 		$fields = array(
-			new \Com\TechDivision\Search\Field\Field('myFieldName', ''),
-			new \Com\TechDivision\Search\Field\Field('myOtherFieldName', ''),
-			new \Com\TechDivision\Search\Field\Field('category', 'TYPO3-TYPO3CR-Domain-Model-Node'),
-			new \Com\TechDivision\Search\Field\Field('id', ''),
-			new \Com\TechDivision\Search\Field\Field('pageId', '')
+			new \TechDivision\Search\Field\Field('myFieldName', ''),
+			new \TechDivision\Search\Field\Field('myOtherFieldName', ''),
+			new \TechDivision\Search\Field\Field('category', 'TYPO3-TYPO3CR-Domain-Model-Node'),
+			new \TechDivision\Search\Field\Field('id', ''),
+			new \TechDivision\Search\Field\Field('pageId', '')
 		);
 		$configurations = array(
 			'Schema' => array(
@@ -127,7 +127,7 @@ class FieldFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	 */
 	public function testCreateFromNodeWithConfiguration(){
 		$nodeMock = $this->getNodeMockWithProperty('name', 'awesomeValue');
-		$field = new \Com\TechDivision\Search\Field\Field('text', 'awesomeValue');
+		$field = new \TechDivision\Search\Field\Field('text', 'awesomeValue');
 		$this->assertEquals($field, $this->fieldFactory->createFromNode(
 			array('fieldAlias' => 'textAlias'),
 			array('textAlias' => 'text'),
@@ -141,7 +141,7 @@ class FieldFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	 */
 	public function testCreateFromNodeWithConfigurationAndBoost(){
 		$nodeMock = $this->getNodeMockWithProperty('name', 'awesomeValue');
-		$field = new \Com\TechDivision\Search\Field\Field('text', 'awesomeValue', 1.7);
+		$field = new \TechDivision\Search\Field\Field('text', 'awesomeValue', 1.7);
 		$this->assertEquals($field, $this->fieldFactory->createFromNode(
 			array('fieldAlias' => 'textAlias', 'fieldBoost' => 1.7),
 			array('textAlias' => 'text'),

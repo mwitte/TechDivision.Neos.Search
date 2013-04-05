@@ -1,9 +1,9 @@
 <?php
 
-namespace Com\TechDivision\Search\Tests\Unit\Field\Result;
+namespace TechDivision\Search\Tests\Unit\Field\Result;
 
 /*                                                                        *
- * This belongs to the TYPO3 Flow package "Com.TechDivision.Neos.Search"  *
+ * This belongs to the TYPO3 Flow package "TechDivision.Neos.Search"  *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU General Public License, either version 3 of the   *
@@ -15,14 +15,14 @@ namespace Com\TechDivision\Search\Tests\Unit\Field\Result;
 class NodeResultFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 
 	/**
-	 * @var \Com\TechDivision\Neos\Search\Factory\Result\NodeResultFactory
+	 * @var \TechDivision\Neos\Search\Factory\Result\NodeResultFactory
 	 */
 	protected $nodeResultFactory;
 
 	public function setUp(){
 		parent::setUp();
-		$this->nodeResultFactory = new \Com\TechDivision\Neos\Search\Factory\Result\NodeResultFactory();
-		$nodeServiceMock = $this->getMockBuilder('\Com\TechDivision\Neos\Search\Service\NodeService')->disableOriginalConstructor()->getMock();
+		$this->nodeResultFactory = new \TechDivision\Neos\Search\Factory\Result\NodeResultFactory();
+		$nodeServiceMock = $this->getMockBuilder('\TechDivision\Neos\Search\Service\NodeService')->disableOriginalConstructor()->getMock();
 		$this->inject($this->nodeResultFactory, 'nodeService', $nodeServiceMock);
 	}
 
@@ -38,7 +38,7 @@ class NodeResultFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	}
 
 	public function testCreateResultFromNodeDocumentWithoutIdentifierField(){
-		$document = new \Com\TechDivision\Search\Document\Document();
+		$document = new \TechDivision\Search\Document\Document();
 		$workspaceMock = $this->getMockBuilder('\TYPO3\TYPO3CR\Domain\Model\Workspace')->disableOriginalConstructor()->getMock();
 		$configuration = array();
 		$configuration['Schema']['DocumentIdentifierField'] = "id";
@@ -47,11 +47,11 @@ class NodeResultFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	}
 
 	public function testCreateResultFromNodeDocumentNotFoundPageNode(){
-		$nodeServiceMock = $this->getMockBuilder('\Com\TechDivision\Neos\Search\Service\NodeService')->disableOriginalConstructor()->getMock();
+		$nodeServiceMock = $this->getMockBuilder('\TechDivision\Neos\Search\Service\NodeService')->disableOriginalConstructor()->getMock();
 		$this->inject($this->nodeResultFactory, 'nodeService', $nodeServiceMock);
 
-		$document = new \Com\TechDivision\Search\Document\Document();
-		$field = new \Com\TechDivision\Search\Field\Field('id', 'idname');
+		$document = new \TechDivision\Search\Document\Document();
+		$field = new \TechDivision\Search\Field\Field('id', 'idname');
 		$document->addField($field);
 
 		$workspaceMock = $this->getMockBuilder('\TYPO3\TYPO3CR\Domain\Model\Workspace')->disableOriginalConstructor()->getMock();
@@ -70,12 +70,12 @@ class NodeResultFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 		$this->inject($this->nodeResultFactory, 'nodeRepository', $nodeRepositoryMock);
 
 		$nodeMock = $this->getSingleNode('name');
-		$nodeServiceMock = $this->getMockBuilder('\Com\TechDivision\Neos\Search\Service\NodeService', array('getPageNodeByNodeIdentifier'))->disableOriginalConstructor()->getMock();
+		$nodeServiceMock = $this->getMockBuilder('\TechDivision\Neos\Search\Service\NodeService', array('getPageNodeByNodeIdentifier'))->disableOriginalConstructor()->getMock();
 		$nodeServiceMock->expects($this->any())->method('getPageNodeByNodeIdentifier')->will($this->returnValue($nodeMock));
 		$this->inject($this->nodeResultFactory, 'nodeService', $nodeServiceMock);
 
-		$document = new \Com\TechDivision\Search\Document\Document();
-		$field = new \Com\TechDivision\Search\Field\Field('id', 'idname');
+		$document = new \TechDivision\Search\Document\Document();
+		$field = new \TechDivision\Search\Field\Field('id', 'idname');
 		$document->addField($field);
 
 		$workspaceMock = $this->getMockBuilder('\TYPO3\TYPO3CR\Domain\Model\Workspace')->disableOriginalConstructor()->getMock();
@@ -84,7 +84,7 @@ class NodeResultFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 		$configuration['Schema']['DocumentIdentifierField'] = "id";
 		$this->inject($this->nodeResultFactory, 'settings', $configuration);
 
-		$result = new \Com\TechDivision\Neos\Search\Domain\Model\Result();
+		$result = new \TechDivision\Neos\Search\Domain\Model\Result();
 		$result->setPageNode($nodeMock);
 		$result->setDocument($document);
 

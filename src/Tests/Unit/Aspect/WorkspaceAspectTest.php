@@ -1,9 +1,9 @@
 <?php
 
-namespace Com\TechDivision\Search\Tests\Unit\Aspect;
+namespace TechDivision\Search\Tests\Unit\Aspect;
 
 /*                                                                        *
- * This belongs to the TYPO3 Flow package "Com.TechDivision.Neos.Search"  *
+ * This belongs to the TYPO3 Flow package "TechDivision.Neos.Search"  *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU General Public License, either version 3 of the   *
@@ -15,14 +15,14 @@ namespace Com\TechDivision\Search\Tests\Unit\Aspect;
 class WorkspaceAspectTest extends \TYPO3\Flow\Tests\UnitTestCase {
 
 	/**
-	 * @var \Com\TechDivision\Neos\Search\Aspect\WorkspaceAspect
+	 * @var \TechDivision\Neos\Search\Aspect\WorkspaceAspect
 	 */
 	protected $workspaceAspect;
 
 	public function setUp(){
 		parent::setUp();
-		$this->workspaceAspect = new \Com\TechDivision\Neos\Search\Aspect\WorkspaceAspect();
-		$searchProviderMock = $this->getMock('\Com\TechDivision\Neos\Search\Provider\SearchProvider', array('providerNeedsInputDocuments', 'updateDocument'));
+		$this->workspaceAspect = new \TechDivision\Neos\Search\Aspect\WorkspaceAspect();
+		$searchProviderMock = $this->getMock('\TechDivision\Neos\Search\Provider\SearchProvider', array('providerNeedsInputDocuments', 'updateDocument'));
 		$searchProviderMock->expects($this->any())->method('providerNeedsInputDocuments')->will($this->returnValue(true));
 		$searchProviderMock->expects($this->any())->method('updateDocument')->will($this->returnValue(true));
 		$this->inject($this->workspaceAspect, 'searchProvider', $searchProviderMock);
@@ -47,7 +47,7 @@ class WorkspaceAspectTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	}
 
 	public function testPublishNodesProviderNeedsNoUpdate(){
-		$searchProviderMock = $this->getMock('\Com\TechDivision\Neos\Search\Provider\SearchProvider', array('providerNeedsInputDocuments'));
+		$searchProviderMock = $this->getMock('\TechDivision\Neos\Search\Provider\SearchProvider', array('providerNeedsInputDocuments'));
 		$searchProviderMock->expects($this->any())->method('providerNeedsInputDocuments')->will($this->returnValue(false));
 		// overwrite default from setUp
 		$this->inject($this->workspaceAspect, 'searchProvider', $searchProviderMock);
@@ -60,12 +60,12 @@ class WorkspaceAspectTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	 */
 	public function testPublishNodesThrowsException(){
 		$joinPointMock = $this->getMock('\TYPO3\Flow\AOP\JoinPointInterface', array('getMethodArgument'));
-		$joinPointMock->expects($this->any())->method('getMethodArgument')->will($this->throwException(new \Com\TechDivision\Neos\Search\Exception\UpdatePublishingNodeException()));
+		$joinPointMock->expects($this->any())->method('getMethodArgument')->will($this->throwException(new \TechDivision\Neos\Search\Exception\UpdatePublishingNodeException()));
 		try{
 			$this->workspaceAspect->publishNodes($joinPointMock);
-		}catch (\Com\TechDivision\Neos\Search\Exception\UpdatePublishingNodeException $e){
+		}catch (\TechDivision\Neos\Search\Exception\UpdatePublishingNodeException $e){
 		}
-		$this->assertEquals(new \Com\TechDivision\Neos\Search\Exception\UpdatePublishingNodeException(), $e);
+		$this->assertEquals(new \TechDivision\Neos\Search\Exception\UpdatePublishingNodeException(), $e);
 	}
 
 	/**
@@ -103,8 +103,8 @@ class WorkspaceAspectTest extends \TYPO3\Flow\Tests\UnitTestCase {
 		$joinPoint = $this->getJoinPoint('live', array($nodeMock));
 		$this->inject($this->workspaceAspect, 'workspaceRepository', $workspaceRepositoryMock);
 
-		$nodeDocumentFactoryMock = $this->getMock('\Com\TechDivision\Neos\Search\Factory\Document\NodeDocumentFactory', array('createFromNode'));
-		$nodeDocumentFactoryMock->expects($this->any())->method('createFromNode')->will($this->returnValue(new \Com\TechDivision\Search\Document\Document()));
+		$nodeDocumentFactoryMock = $this->getMock('\TechDivision\Neos\Search\Factory\Document\NodeDocumentFactory', array('createFromNode'));
+		$nodeDocumentFactoryMock->expects($this->any())->method('createFromNode')->will($this->returnValue(new \TechDivision\Search\Document\Document()));
 		$this->inject($this->workspaceAspect, 'nodeDocumentFactory', $nodeDocumentFactoryMock);
 
 		$this->assertSame(1, $this->workspaceAspect->publishNodes($joinPoint));

@@ -1,65 +1,65 @@
-Com:
-  TechDivision:
-    Neos:
-      Search:
-        # defines the schema for solr
-        Schema:
-          # defines the uniqueKey field
-          DocumentIdentifierField: 'id'
-          # defines the field where the identifier of the page gets stored
-          PageNodeIdentifier: 'subject'
-          # defines the documentType field
-          DocumentTypeField: 'category'
-          # the documentTypes which get indexed
-          DocumentTypes:
-            TYPO3-TYPO3CR-Domain-Model-Node:
-              # Field which stores the node contentType
-              ContentTypeField: 'comments'
-              ContentTypes:
-                # Add here every contentType with their properties which should get indexed by solr
-                # The boosts(float) are optional
-                TYPO3.Neos.ContentTypes:Text:
-                  documentBoost: 1.0
-                  properties:
-                    text:
-                      # alias from ...Schema.FieldAliases few lines below
-                      fieldAlias: 'content'
-                      fieldBoost: 1
-                TYPO3.Neos.ContentTypes:Headline:
-                  properties:
-                    title:
-                      # alias from ...Schema.FieldAliases few lines below
-                      fieldAlias: 'content'
-                      fieldBoost: 1
-                TYPO3.Neos.ContentTypes:Page:
-                  properties:
-                    title:
-                      # alias from ...Schema.FieldAliases few lines below
-                      fieldAlias: 'content'
-          # Defines the fieldNames of the solr schema
-          FieldAliases:
-            # one field alias and it's fieldname in the solr schema
-            content: 'description'
 
-        SearchResult:
-          # Highlighting for the search token
-          Highlight:
-            # pre and suffix for the highlighted word
-            prefix: '<b>'
-            suffix: '</b>'
-        # Currently this enables a detailed search results for testing purpose
-        DetailResults: false
+TechDivision:
+  Neos:
+    Search:
+      # defines the schema for solr
+      Schema:
+        # defines the uniqueKey field
+        DocumentIdentifierField: 'id'
+        # defines the field where the identifier of the page gets stored
+        PageNodeIdentifier: 'subject'
+        # defines the documentType field
+        DocumentTypeField: 'category'
+        # the documentTypes which get indexed
+        DocumentTypes:
+          TYPO3-TYPO3CR-Domain-Model-Node:
+            # Field which stores the node contentType
+            ContentTypeField: 'comments'
+            ContentTypes:
+              # Add here every contentType with their properties which should get indexed by solr
+              # The boosts(float) are optional
+              TYPO3.Neos.ContentTypes:Text:
+                documentBoost: 1.0
+                properties:
+                  text:
+                    # alias from ...Schema.FieldAliases few lines below
+                    fieldAlias: 'content'
+                    fieldBoost: 1
+              TYPO3.Neos.ContentTypes:Headline:
+                properties:
+                  title:
+                    # alias from ...Schema.FieldAliases few lines below
+                    fieldAlias: 'content'
+                    fieldBoost: 1
+              TYPO3.Neos.ContentTypes:Page:
+                properties:
+                  title:
+                    # alias from ...Schema.FieldAliases few lines below
+                    fieldAlias: 'content'
+        # Defines the fieldNames of the solr schema
+        FieldAliases:
+          # one field alias and it's fieldname in the solr schema
+          content: 'description'
 
-        ## do not change ## The node's workspace which get indexed and are findable
-        Workspace: 'live'
-        ## do not change ## this contentType is required for Neos ##
-        ResultContentType: 'TYPO3.Neos.ContentTypes:Page'
+      SearchResult:
+        # Highlighting for the search token
+        Highlight:
+          # pre and suffix for the highlighted word
+          prefix: '<b>'
+          suffix: '</b>'
+      # Currently this enables a detailed search results for testing purpose
+      DetailResults: false
+
+      ## do not change ## The node's workspace which get indexed and are findable
+      Workspace: 'live'
+      ## do not change ## this contentType is required for Neos ##
+      ResultContentType: 'TYPO3.Neos.ContentTypes:Page'
 
 # this registers the front-end plugin
 TYPO3:
   TYPO3CR:
     contentTypes:
-      'Com.TechDivision.Neos.Search:SearchPlugin':
+      'TechDivision.Neos.Search:SearchPlugin':
         superTypes: ['TYPO3.Neos.ContentTypes:Plugin']
         label: 'Searchbox'
         group: 'Plugins'

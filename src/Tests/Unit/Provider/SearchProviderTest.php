@@ -1,9 +1,9 @@
 <?php
 
-namespace Com\TechDivision\Search\Tests\Unit\Field;
+namespace TechDivision\Search\Tests\Unit\Field;
 
 /*                                                                        *
- * This belongs to the TYPO3 Flow package "Com.TechDivision.Neos.Search"  *
+ * This belongs to the TYPO3 Flow package "TechDivision.Neos.Search"  *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU General Public License, either version 3 of the   *
@@ -15,7 +15,7 @@ namespace Com\TechDivision\Search\Tests\Unit\Field;
 class SearchProviderTest extends \TYPO3\Flow\Tests\UnitTestCase {
 
 	/**
-	 * @var \Com\TechDivision\Neos\Search\Provider\SearchProvider
+	 * @var \TechDivision\Neos\Search\Provider\SearchProvider
 	 */
 	protected $searchProvider;
 
@@ -26,7 +26,7 @@ class SearchProviderTest extends \TYPO3\Flow\Tests\UnitTestCase {
 
 	public function setUp(){
 		parent::setUp();
-		$this->searchProvider = new \Com\TechDivision\Neos\Search\Provider\SearchProvider();
+		$this->searchProvider = new \TechDivision\Neos\Search\Provider\SearchProvider();
 
 		$workspaceRepositoryMock = $this->getMock('\TYPO3\TYPO3CR\Domain\Repository\WorkspaceRepository', array('findByName'));
 		$queryResultMock = $this->getMockBuilder('\TYPO3\Flow\Persistence\Generic\QueryResult', array('getFirst'))->disableOriginalConstructor()->getMock();
@@ -35,23 +35,23 @@ class SearchProviderTest extends \TYPO3\Flow\Tests\UnitTestCase {
 		$workspaceRepositoryMock->expects($this->any())->method('findByName')->will($this->returnValue($queryResultMock));
 		$this->inject($this->searchProvider, 'workspaceRepository', $workspaceRepositoryMock);
 
-		$this->providerMock = $this->getMockBuilder('\Com\TechDivision\Search\Provider\ProviderInterface', array('searchByString', 'addDocument', 'providerNeedsInputDocuments'))->getMock();
+		$this->providerMock = $this->getMockBuilder('\TechDivision\Search\Provider\ProviderInterface', array('searchByString', 'addDocument', 'providerNeedsInputDocuments'))->getMock();
 		$this->providerMock->expects($this->any())->method('searchByString')->will($this->returnValue(array()));
 		$this->providerMock->expects($this->any())->method('addDocument')->will($this->returnValue(true));
 	}
 
 	private function getDocumentFactoryMock($getAllDocumentsDocs = array()){
-		$documentFactoryMock = $this->getMockBuilder('\Com\TechDivision\Neos\Search\Factory\DocumentFactoryInterface', array('getAllDocuments'))->getMock();
+		$documentFactoryMock = $this->getMockBuilder('\TechDivision\Neos\Search\Factory\DocumentFactoryInterface', array('getAllDocuments'))->getMock();
 		$documentFactoryMock->expects($this->any())->method('getAllDocuments')->will($this->returnValue($getAllDocumentsDocs));
 		return $documentFactoryMock;
 	}
 
 	public function testSearch(){
-		$fieldFactoryMock = $this->getMock('\Com\TechDivision\Neos\Search\Factory\FieldFactory', array('createFromMultipleConfigurations'));
+		$fieldFactoryMock = $this->getMock('\TechDivision\Neos\Search\Factory\FieldFactory', array('createFromMultipleConfigurations'));
 		$fieldFactoryMock->expects($this->any())->method('createFromMultipleConfigurations')->will($this->returnValue(array()));
 		$this->inject($this->searchProvider, 'fieldFactory', $fieldFactoryMock);
 
-		$resultFactoryMock = $this->getMockBuilder('\Com\TechDivision\Neos\Search\Factory\ResultFactoryInterface', array('createMultipleFromDocuments'))->getMock();
+		$resultFactoryMock = $this->getMockBuilder('\TechDivision\Neos\Search\Factory\ResultFactoryInterface', array('createMultipleFromDocuments'))->getMock();
 		$resultFactoryMock->expects($this->any())->method('createMultipleFromDocuments')->will($this->returnValue(array()));
 		$this->inject($this->searchProvider, 'resultFactory', $resultFactoryMock);
 		$this->inject($this->searchProvider, 'provider', $this->providerMock);
@@ -80,7 +80,7 @@ class SearchProviderTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	 * @depends testUpdateAllDocumentsNoDocumentsFound
 	 */
 	public function testUpdateAllDocumentsDocumentsFound(){
-		$this->inject($this->searchProvider, 'documentFactory', $this->getDocumentFactoryMock(array(new \Com\TechDivision\Search\Document\Document())));
+		$this->inject($this->searchProvider, 'documentFactory', $this->getDocumentFactoryMock(array(new \TechDivision\Search\Document\Document())));
 
 		$this->providerMock->expects($this->any())->method('providerNeedsInputDocuments')->will($this->returnValue(true));
 		$this->inject($this->searchProvider, 'provider', $this->providerMock);
@@ -90,7 +90,7 @@ class SearchProviderTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	public function testUpdateDocumentProviderNeedsNoInputDoc(){
 		$this->providerMock->expects($this->any())->method('providerNeedsInputDocuments')->will($this->returnValue(false));
 		$this->inject($this->searchProvider, 'provider', $this->providerMock);
-		$this->assertSame(null, $this->searchProvider->updateDocument(new \Com\TechDivision\Search\Document\Document()));
+		$this->assertSame(null, $this->searchProvider->updateDocument(new \TechDivision\Search\Document\Document()));
 	}
 
 	/**
@@ -99,7 +99,7 @@ class SearchProviderTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	public function testUpdateDocument(){
 		$this->providerMock->expects($this->any())->method('providerNeedsInputDocuments')->will($this->returnValue(true));
 		$this->inject($this->searchProvider, 'provider', $this->providerMock);
-		$this->assertSame(true, $this->searchProvider->updateDocument(new \Com\TechDivision\Search\Document\Document()));
+		$this->assertSame(true, $this->searchProvider->updateDocument(new \TechDivision\Search\Document\Document()));
 	}
 
 	public function testRemoveAllDocumentsProviderNeedsNoInputDoc(){
@@ -124,7 +124,7 @@ class SearchProviderTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	public function testRemoveAllDocumentsWithEmptyDocument(){
 		$this->providerMock->expects($this->any())->method('providerNeedsInputDocuments')->will($this->returnValue(true));
 		$this->inject($this->searchProvider, 'provider', $this->providerMock);
-		$this->inject($this->searchProvider, 'documentFactory', $this->getDocumentFactoryMock(array(new \Com\TechDivision\Search\Document\Document())));
+		$this->inject($this->searchProvider, 'documentFactory', $this->getDocumentFactoryMock(array(new \TechDivision\Search\Document\Document())));
 		$this->assertSame(0, $this->searchProvider->removeAllDocuments());
 	}
 
@@ -134,8 +134,8 @@ class SearchProviderTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	public function testRemoveAllDocumentsWithFilledDocument(){
 		$this->providerMock->expects($this->any())->method('providerNeedsInputDocuments')->will($this->returnValue(true));
 		$this->inject($this->searchProvider, 'provider', $this->providerMock);
-		$document = new \Com\TechDivision\Search\Document\Document();
-		$document->addField(new \Com\TechDivision\Search\Field\Field('identifier', '123456'));
+		$document = new \TechDivision\Search\Document\Document();
+		$document->addField(new \TechDivision\Search\Field\Field('identifier', '123456'));
 		$this->inject($this->searchProvider, 'documentFactory', $this->getDocumentFactoryMock(array($document)));
 		$this->inject(
 			$this->searchProvider,

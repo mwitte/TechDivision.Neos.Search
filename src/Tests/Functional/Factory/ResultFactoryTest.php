@@ -1,9 +1,9 @@
 <?php
 
-namespace Com\TechDivision\Neos\Search\Tests\Functional\Factory;
+namespace TechDivision\Neos\Search\Tests\Functional\Factory;
 
 /*                                                                        *
- * This belongs to the TYPO3 Flow package "Com.TechDivision.Neos.Search"  *
+ * This belongs to the TYPO3 Flow package "TechDivision.Neos.Search"  *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU General Public License, either version 3 of the   *

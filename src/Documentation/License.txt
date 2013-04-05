@@ -1,6 +1,6 @@
-This file is part of Com.TechDivision.Neos.Search.
+This file is part of TechDivision.Neos.Search.
 
-Com.TechDivision.Neos.Search provides a frontend search interface
+TechDivision.Neos.Search provides a frontend search interface
 for TYPO3 Neos.
 Copyright (C) 2013 Matthias Witte
 http://www.matthias-witte.net/

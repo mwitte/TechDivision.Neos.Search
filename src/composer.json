@@ -1,1 +1,16 @@
-{"name":"com\/techdivision-neos-search","type":"typo3-flow-package","description":"","require":{"typo3\/flow":"*"},"autoload":{"psr-0":{"Com\\TechDivision\\Neos\\Search":"Classes"}}}
+{
+	"name":"techdivision/neos-search",
+	"type":"typo3-flow-package",
+	"description":"",
+	"require":
+	{
+		"typo3\/flow":"*"
+	},
+	"autoload":
+	{
+		"psr-0":
+		{
+			"TechDivision\\Neos\\Search":"Classes"
+		}
+	}
+}

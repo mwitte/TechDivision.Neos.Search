@@ -1,6 +1,5 @@
 <?php
-
-namespace TechDivision\Neos\Search\Tests\Functional\Provider;
+namespace TechDivision\Neos\Search\Exception;
 
 /*                                                                        *
  * This belongs to the TYPO3 Flow package "TechDivision.Neos.Search"  *
@@ -12,25 +11,16 @@ namespace TechDivision\Neos\Search\Tests\Functional\Provider;
  * Copyright (C) 2013 Matthias Witte                                      *
  * http://www.matthias-witte.net                                          */
 
-class SearchProviderTest extends \TYPO3\Flow\Tests\FunctionalTestCase {
+/**
+ * @codeCoverageIgnore
+ */
+class UpdatePublishingNodeException extends \Exception {
 
-	/**
-	 * @var boolean
-	 */
-	static protected $testablePersistenceEnabled = FALSE;
-
-	/**
-	 * @var \TechDivision\Neos\Search\Provider\SearchProvider
-	 */
-	protected $provider;
-
-	public function setUp(){
-		parent::setUp();
-		$this->provider = $this->objectManager->get('\TechDivision\Neos\Search\Provider\SearchProvider');
-	}
-
-	public function testSearchWithoutResult(){
-		$this->assertSame(array(), $this->provider->search('unFindAbleUn1queString'));
+	public function __construct($message = 'Could not update published node in search index',
+								$code = 0,
+								\Exception $previous = null)
+	{
+		parent::__construct($message, $code, $previous);
 	}
 }
 ?>

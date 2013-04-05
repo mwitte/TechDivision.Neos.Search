@@ -1,9 +1,9 @@
 <?php
 
-namespace Com\TechDivision\Search\Tests\Unit\ViewHelpers;
+namespace TechDivision\Search\Tests\Unit\ViewHelpers;
 
 /*                                                                        *
- * This belongs to the TYPO3 Flow package "Com.TechDivision.Neos.Search"  *
+ * This belongs to the TYPO3 Flow package "TechDivision.Neos.Search"  *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU General Public License, either version 3 of the   *
@@ -15,13 +15,13 @@ namespace Com\TechDivision\Search\Tests\Unit\ViewHelpers;
 class SearchResultViewHelperTest extends \TYPO3\Flow\Tests\UnitTestCase {
 
 	/**
-	 * @var \Com\TechDivision\Neos\Search\ViewHelpers\SearchResultViewHelper
+	 * @var \TechDivision\Neos\Search\ViewHelpers\SearchResultViewHelper
 	 */
 	protected $searchResultViewHelper;
 
 	public function setUp(){
 		parent::setUp();
-		$this->searchResultViewHelper = $this->getMock('\Com\TechDivision\Neos\Search\ViewHelpers\SearchResultViewHelper', array('renderChildren'));
+		$this->searchResultViewHelper = $this->getMock('\TechDivision\Neos\Search\ViewHelpers\SearchResultViewHelper', array('renderChildren'));
 		$this->searchResultViewHelper->expects($this->any())->method('renderChildren')->will($this->returnValue(null));
 		$settings = array();
 		$settings['SearchResult']['Highlight']['prefix'] = '<b>';

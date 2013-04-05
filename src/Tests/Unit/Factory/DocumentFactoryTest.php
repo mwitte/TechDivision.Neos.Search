@@ -1,9 +1,9 @@
 <?php
 
-namespace Com\TechDivision\Search\Tests\Unit\Field;
+namespace TechDivision\Search\Tests\Unit\Field;
 
 /*                                                                        *
- * This belongs to the TYPO3 Flow package "Com.TechDivision.Neos.Search"  *
+ * This belongs to the TYPO3 Flow package "TechDivision.Neos.Search"  *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU General Public License, either version 3 of the   *
@@ -15,12 +15,12 @@ namespace Com\TechDivision\Search\Tests\Unit\Field;
 class DocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 
 	/**
-	 * @var \Com\TechDivision\Neos\Search\Factory\DocumentFactory
+	 * @var \TechDivision\Neos\Search\Factory\DocumentFactory
 	 */
 	protected $documentFactory;
 
 	/**
-	 * @var \Com\TechDivision\Neos\Search\Factory\Document\NodeDocumentFactory
+	 * @var \TechDivision\Neos\Search\Factory\Document\NodeDocumentFactory
 	 */
 	protected $nodeDocumentFactoryMock;
 
@@ -31,9 +31,9 @@ class DocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 
 	public function setUp(){
 		parent::setUp();
-		$this->documentFactory = new \Com\TechDivision\Neos\Search\Factory\DocumentFactory();
+		$this->documentFactory = new \TechDivision\Neos\Search\Factory\DocumentFactory();
 		$this->workspaceMock = $this->getMockBuilder('\TYPO3\TYPO3CR\Domain\Model\Workspace')->disableOriginalConstructor()->getMock();
-		$this->nodeDocumentFactoryMock = $this->getMockBuilder('\Com\TechDivision\Neos\Search\Factory\Document\NodeDocumentFactory', array('getAllDocuments'))->disableOriginalConstructor()->getMock();
+		$this->nodeDocumentFactoryMock = $this->getMockBuilder('\TechDivision\Neos\Search\Factory\Document\NodeDocumentFactory', array('getAllDocuments'))->disableOriginalConstructor()->getMock();
 		$this->nodeDocumentFactoryMock->expects($this->any())->method('getAllDocuments')->will($this->returnValue(array()));
 	}
 

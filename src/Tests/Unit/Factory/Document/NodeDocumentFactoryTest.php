@@ -1,9 +1,9 @@
 <?php
 
-namespace Com\TechDivision\Search\Tests\Unit\Field;
+namespace TechDivision\Search\Tests\Unit\Field;
 
 /*                                                                        *
- * This belongs to the TYPO3 Flow package "Com.TechDivision.Neos.Search"  *
+ * This belongs to the TYPO3 Flow package "TechDivision.Neos.Search"  *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU General Public License, either version 3 of the   *
@@ -15,7 +15,7 @@ namespace Com\TechDivision\Search\Tests\Unit\Field;
 class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 
 	/**
-	 * @var \Com\TechDivision\Neos\Search\Factory\Document\NodeDocumentFactory
+	 * @var \TechDivision\Neos\Search\Factory\Document\NodeDocumentFactory
 	 */
 	protected $nodeDocumentFactory;
 
@@ -31,7 +31,7 @@ class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 
 	public function setUp(){
 		parent::setUp();
-		$this->nodeDocumentFactory = new \Com\TechDivision\Neos\Search\Factory\Document\NodeDocumentFactory();
+		$this->nodeDocumentFactory = new \TechDivision\Neos\Search\Factory\Document\NodeDocumentFactory();
 		$this->workspaceMock = $this->getMockBuilder('\TYPO3\TYPO3CR\Domain\Model\Workspace')->disableOriginalConstructor()->getMock();
 
 		$this->completeConfiguration = array(
@@ -147,10 +147,10 @@ class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 		// remove the matching fieldName
 		unset($this->completeConfiguration['Schema']['FieldAliases']['textAlias']);
 
-		$field = new \Com\TechDivision\Search\Field\Field('text', 'myValue');
-		$document = new \Com\TechDivision\Search\Document\Document();
+		$field = new \TechDivision\Search\Field\Field('text', 'myValue');
+		$document = new \TechDivision\Search\Document\Document();
 		$document->addField($field);
-		$document->addField(new \Com\TechDivision\Search\Field\Field('id', 21));
+		$document->addField(new \TechDivision\Search\Field\Field('id', 21));
 		$this->inject($this->nodeDocumentFactory, 'settings', $this->completeConfiguration);
 		$this->assertEquals(null, $this->nodeDocumentFactory->createFromNode($nodeMock, $this->workspaceMock));
 	}
@@ -159,7 +159,7 @@ class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	 * @depends testCreateFromNodeWithContentTypeNotConfigured
 	 */
 	public function testCreateFromNodeWithContentTypeConfigured(){
-		$nodeServiceMock = $this->getMock('Com\TechDivision\Neos\Search\Service', array('getPageNode'));
+		$nodeServiceMock = $this->getMock('TechDivision\Neos\Search\Service', array('getPageNode'));
 		$pageNodeMock = $this->getNodeMockWithProperty('PageNodeMock', 'subject', 'myValue', 21);
 		$nodeServiceMock->expects($this->any())->method('getPageNode')->will($this->returnValue($pageNodeMock));
 
@@ -167,12 +167,12 @@ class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 
 		$nodeMock = $this->getNodeMockWithProperty('MyContentType', 'text', 'myValue', 21);
 
-		$field = new \Com\TechDivision\Search\Field\Field('text', 'myValue');
-		$document = new \Com\TechDivision\Search\Document\Document();
+		$field = new \TechDivision\Search\Field\Field('text', 'myValue');
+		$document = new \TechDivision\Search\Document\Document();
 		$document->addField($field);
-		$document->addField(new \Com\TechDivision\Search\Field\Field('id', 21));
-		$document->addField(new \Com\TechDivision\Search\Field\Field($this->completeConfiguration['Schema']['DocumentTypeField'], 'TYPO3-TYPO3CR-Domain-Model-Node'));
-		$document->addField(new \Com\TechDivision\Search\Field\Field('subject', 21));
+		$document->addField(new \TechDivision\Search\Field\Field('id', 21));
+		$document->addField(new \TechDivision\Search\Field\Field($this->completeConfiguration['Schema']['DocumentTypeField'], 'TYPO3-TYPO3CR-Domain-Model-Node'));
+		$document->addField(new \TechDivision\Search\Field\Field('subject', 21));
 		$this->inject($this->nodeDocumentFactory, 'settings', $this->completeConfiguration);
 		$this->assertEquals($document, $this->nodeDocumentFactory->createFromNode($nodeMock, $this->workspaceMock));
 	}
@@ -181,7 +181,7 @@ class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	 * @depends testCreateFromNodeWithContentTypeConfiguredMissingField
 	 */
 	public function testCreateFromNodeWithContentTypeConfiguredWithFieldBoost(){
-		$nodeServiceMock = $this->getMock('Com\TechDivision\Neos\Search\Service', array('getPageNode'));
+		$nodeServiceMock = $this->getMock('TechDivision\Neos\Search\Service', array('getPageNode'));
 		$pageNodeMock = $this->getNodeMockWithProperty('PageNodeMock', 'subject', 'myValue', 21);
 		$nodeServiceMock->expects($this->any())->method('getPageNode')->will($this->returnValue($pageNodeMock));
 
@@ -192,11 +192,11 @@ class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 		// modify configuration
 		$this->completeConfiguration['Schema']['DocumentTypes']['TYPO3-TYPO3CR-Domain-Model-Node']['ContentTypes']['MyContentType']['documentBoost'] = 1.35;
 
-		$document = new \Com\TechDivision\Search\Document\Document();
-		$document->addField(new \Com\TechDivision\Search\Field\Field('text', 'myValue'));
-		$document->addField(new \Com\TechDivision\Search\Field\Field('id', 21));
-		$document->addField(new \Com\TechDivision\Search\Field\Field($this->completeConfiguration['Schema']['DocumentTypeField'], 'TYPO3-TYPO3CR-Domain-Model-Node'));
-		$document->addField(new \Com\TechDivision\Search\Field\Field('subject', 21));
+		$document = new \TechDivision\Search\Document\Document();
+		$document->addField(new \TechDivision\Search\Field\Field('text', 'myValue'));
+		$document->addField(new \TechDivision\Search\Field\Field('id', 21));
+		$document->addField(new \TechDivision\Search\Field\Field($this->completeConfiguration['Schema']['DocumentTypeField'], 'TYPO3-TYPO3CR-Domain-Model-Node'));
+		$document->addField(new \TechDivision\Search\Field\Field('subject', 21));
 		$document->setBoost(1.35);
 		$this->inject($this->nodeDocumentFactory, 'settings', $this->completeConfiguration);
 
@@ -220,17 +220,17 @@ class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 		$nodeRepositoryMock->expects($this->any())->method('findAll')->will($this->returnValue(array($nodeMock)));
 		$this->inject($this->nodeDocumentFactory, 'nodeRepository', $nodeRepositoryMock);
 
-		$nodeServiceMock = $this->getMock('Com\TechDivision\Neos\Search\Service', array('getPageNode'));
+		$nodeServiceMock = $this->getMock('TechDivision\Neos\Search\Service', array('getPageNode'));
 		$pageNodeMock = $this->getNodeMockWithProperty('PageNodeMock', 'subject', 'myValue', 21);
 		$nodeServiceMock->expects($this->any())->method('getPageNode')->will($this->returnValue($pageNodeMock));
 
 		$this->inject($this->nodeDocumentFactory, 'nodeService', $nodeServiceMock);
 
-		$document = new \Com\TechDivision\Search\Document\Document();
-		$document->addField(new \Com\TechDivision\Search\Field\Field('text', 'myValue'));
-		$document->addField(new \Com\TechDivision\Search\Field\Field('id', 21));
-		$document->addField(new \Com\TechDivision\Search\Field\Field($this->completeConfiguration['Schema']['DocumentTypeField'], 'TYPO3-TYPO3CR-Domain-Model-Node'));
-		$document->addField(new \Com\TechDivision\Search\Field\Field('subject', 21));
+		$document = new \TechDivision\Search\Document\Document();
+		$document->addField(new \TechDivision\Search\Field\Field('text', 'myValue'));
+		$document->addField(new \TechDivision\Search\Field\Field('id', 21));
+		$document->addField(new \TechDivision\Search\Field\Field($this->completeConfiguration['Schema']['DocumentTypeField'], 'TYPO3-TYPO3CR-Domain-Model-Node'));
+		$document->addField(new \TechDivision\Search\Field\Field('subject', 21));
 		$document->setBoost(1.35);
 
 		// modify configuration
