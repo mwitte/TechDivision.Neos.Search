@@ -1,5 +1,26 @@
 'TechDivision.Neos.Search:FormPlugin':
   superTypes: ['TYPO3.Neos.NodeTypes:Plugin']
   ui:
-    label: 'TD Search Form'
+    label: 'TechDivision Neos Search'
     group: 'Plugins'
+    icon:
+      light: 'Images/Icons/White/zoom_icon-16.png'
+      dark: 'Images/Icons/Black/zoom_icon-16.png'
+    inspector:
+      groups:
+        pluginSettings:
+          label: 'Plugin Settings'
+          position: 300
+  properties:
+    package:
+      type: string
+      ui: false
+    subpackage:
+      type: string
+      ui: false
+    controller:
+      type: string
+      ui: false
+    action:
+      type: string
+      ui: false

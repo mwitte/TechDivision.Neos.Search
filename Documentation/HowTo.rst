@@ -1,4 +1,3 @@
-========================
 TechDivision.Neos.Search
 ========================
 
@@ -16,7 +15,7 @@ Installation
 ------------
 
 This package and it's dependency the "TechDivision.Search" package are not added to packagist.org so far. So you have to
-edit the composer.json of your Neos instance in the base folder to add the needed repositories.
+add some repositories to the composer.json of your Neos base distribution(your Neos instance).
 
 Add the following repositories to repository section like below:
 
@@ -35,6 +34,8 @@ If you added the repositories you have to require this package with the followin
 
 	composer require techdivision/neos-search \*
 
+I recommend to install composer globally.
+
 
 Integration
 -----------
@@ -47,7 +48,10 @@ TypoScripts / Library / Root.ts2
 
 Now you are able to add the front end plugin in the backend.
 
-marita
+### Known Bugs
+#### Adding the FE Plugin to a page in the backend throws an ExtDirect error
+This is not my fault. I think there is still a bug in Neos. Just refresh the page after adding and the plugin got
+added and everything works.
 
 
 Search for other NodeTypes
@@ -87,6 +91,7 @@ This command controller was only for simple testing and debugging and should get
 The functional tests are currently not suitable because in testing context the database is set up but not filled
 with nodes. Probably i'll find a solution for this.
 
+### Last change in TYPO3 Flow broke coverage possibility for functional tests
 The functional tests are currently not suitable, the last changes in the TYPO3 Flow framework made it nearly impossible to
 cover the code with 100%. There is already an issue for that in forge to fix it.
 
@@ -105,14 +110,14 @@ indexing and searching. Because there are various interfaces used and the implem
 there is the possibility to index and search for other models by extending the existing source in your own package.
 
 To get most possibilities every node gets discrete indexed and searched. The results are the most suitable nodes and
-it's page reduced by page. In future here should be the opportunity to change this to add all nodes by page as one
-document to search index by configuration.
+it's page reduced by page.
 
 
 Why this namespace?
 -------------------
 
-Until now this is a non-corporate project. I chose this namespace to participate at a company internal contest.
+Until now this is a non-corporate project i made in my leisure time. I chose this namespace to participate at a company
+internal contest.
 
 
 Licence

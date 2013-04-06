@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<project name="TechDivision.Neos.Search" default="deploy" basedir="../../../../../../Volumes/Files/Workspace/Flow/Application/TechDivision.Neos.Search/Meta">
+	<property file="${basedir}/build.properties"/>
+	<property file="${basedir}/build.default.properties"/>
+    <property file="${basedir}/build.mac.properties"/>
+	<property name="instance.dir" value="${dir.www}/${relative.instance.dir}" />
+    <property name="instance.dir.parent" value="${dir.www}/${relative.instance.dir.parent}" />
+
+
+    <!-- ==================================================================== -->
+    <!-- Creates a Neos instance                                              -->
+    <!-- ==================================================================== -->
+    <target name="init-instance">
+        <antcall target="get-neos-basedistribution-by-composer"/>
+        <antcall target="get-neos-by-composer"/>
+        <antcall target="configure-flow"/>
+        <antcall target="setup-database"/>
+        <antcall target="migrate-database"/>
+        <antcall target="import-demo-site"/>
+        <antcall target="create-admin-user"/>
+    </target>
+
+    <!-- ==================================================================== -->
+    <!-- Installs the packages                                                -->
+    <!-- ==================================================================== -->
+    <target name="install-packages">
+        <antcall target="add-repositories"/>
+        <antcall target="require-packages"/>
+        <antcall target="integrate-fe-plugin"/>
+    </target>
+
+
+
+
+    <!-- ==================================================================== -->
+    <!-- Targets for creating a Neos instance                                 -->
+    <!-- ==================================================================== -->
+
+    <target name="check-neos-basedistribution-exists">
+        <available file="${instance.dir}/composer.json" property="basedistribution.present" />
+    </target>
+
+    <target name="get-neos-basedistribution-by-composer" depends="check-neos-basedistribution-exists" unless="basedistribution.present">
+        <mkdir dir="${instance.dir.parent}"/>
+        <exec dir="${instance.dir.parent}" executable="${bin.composer}">
+            <arg line="create-project --dev typo3/neos-base-distribution:dev-master ${project}"/>
+        </exec>
+    </target>
+
+    <target name="check-neos-exists">
+        <available file="${instance.dir}/flow" property="neos.present" />
+    </target>
+
+    <target name="get-neos-by-composer" depends="check-neos-exists" unless="neos.present">
+        <exec dir="${instance.dir}" executable="${bin.composer}">
+            <arg line="update"/>
+        </exec>
+    </target>
+
+    <target name="configure-flow">
+        <echo message="Create Settings.yaml with database connection settings" />
+        <echo file="${instance.dir}/Configuration/Settings.yaml"><![CDATA[
+TYPO3:
+  Flow:
+    persistence:
+      backendOptions:
+        dbname: ${mysql.database}
+        user: ${mysql.username}
+        password: ${mysql.password}
+        host: ${mysql.host}]]></echo>
+    </target>
+
+    <target name="setup-database">
+        <echo message="Initialize database ${mysql.database}" />
+        <exec executable="${bin.mysql}">
+            <arg line="-h${mysql.host}"/>
+            <arg line="-u${mysql.username}"/>
+            <arg line="-p${mysql.password}"/>
+            <arg line="-e'create database ${mysql.database}'"/>
+        </exec>
+    </target>
+
+    <target name="migrate-database">
+        <exec dir="${instance.dir}" executable="./flow">
+            <arg line="doctrine:migrate"/>
+        </exec>
+    </target>
+
+    <target name="import-demo-site">
+        <exec dir="${instance.dir}" executable="./flow">
+            <arg line="site:import --package-key TYPO3.NeosDemoTypo3Org"/>
+        </exec>
+    </target>
+
+    <target name="create-admin-user">
+        <exec dir="${instance.dir}" executable="./flow">
+            <arg line="user:create ${user.nickname} ${user.password} ${user.firstname} ${user.lastname}"/>
+        </exec>
+        <exec dir="${instance.dir}" executable="./flow">
+            <arg line="user:addrole ${user.nickname} Administrator"/>
+        </exec>
+    </target>
+
+
+
+    <!-- ==================================================================== -->
+    <!-- Targets for installing packages                                      -->
+    <!-- ==================================================================== -->
+
+    <target name="add-repositories">
+        <replace file="${instance.dir}/composer.json">
+            <replacetoken><![CDATA["require": {]]></replacetoken>
+            <replacevalue><![CDATA["repositories": [
+        {
+            "type": "git",
+            "url": "http://192.168.1.106/Neos.git"
+        },
+        {
+            "type": "git",
+            "url": "http://192.168.1.106/Search.git"
+        }
+    ],
+    "require": {]]></replacevalue>
+        </replace>
+    </target>
+
+    <target name="require-packages">
+        <echo message="Command: composer require techdivision/neos-search \*"/>
+        <exec dir="${instance.dir}" executable="${bin.composer}">
+            <arg line="require techdivision/neos-search *"/>
+        </exec>
+    </target>
+
+    <target name="integrate-fe-plugin">
+        <echo
+                append="true"
+                file="${instance.dir}/Packages/Sites/TYPO3.NeosDemoTypo3Org/Resources/Private/TypoScripts/Library/Root.ts2"
+                ><![CDATA[include: resource://TechDivision.Neos.Search/Private/TypoScript/Root.ts2]]></echo>
+    </target>
+</project>

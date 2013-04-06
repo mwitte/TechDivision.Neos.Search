@@ -1,10 +1,12 @@
 <?xml version="1.0"?>
-<phpunit strict="true"
-		bootstrap="/var/www/flow/TYPO3-Neos-1.0-dev/Build/BuildEssentials/PhpUnit/UnitTestBootstrap.php"
+<phpunit
+		strict="true"
 		convertErrorsToExceptions="true"
 		convertNoticesToExceptions="true"
 		convertWarningsToExceptions="true"
-		timeoutForSmallTests="0">
+		timeoutForSmallTests="0"
+		bootstrap="/var/www/flow/TYPO3-Neos-1.0-dev/Build/BuildEssentials/PhpUnit/UnitTestBootstrap.php">
+		<!-- Fully qualified path to the UnitTestBootstrap.php of your instance -->
 	<testsuites>
 		<testsuite name="All tests">
 			<directory>Unit</directory>
