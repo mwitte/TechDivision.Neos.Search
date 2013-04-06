@@ -17,6 +17,9 @@ use TYPO3\Flow\Annotations as Flow;
  * UpdateNodesCommand command controller for the Com.TechDivision.Neos.Search package
  *
  * @Flow\Scope("singleton")
+ *
+ * No coverage needed, this controller is needed only for development
+ * @codeCoverageIgnore
  */
 class TDNeosSearchCommandController extends \TYPO3\Flow\Cli\CommandController {
 

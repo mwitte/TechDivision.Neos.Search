@@ -29,23 +29,53 @@ Add the following repositories to repository section like below:
 			"type": "git",
 			"url": "http://192.168.1.106/Search.git"
 		}
-	],
+	]
 
 If you added the repositories you have to require this package with the following command in the instance folder:
 
-composer create-project --dev typo3/neos-base-distribution:dev-master TYPO3-Neos-1.0-dev
-cd TYPO3-Neos-1.0-dev
-composer update
+	composer require techdivision/neos-search \*
 
-composer require techdivision/neos-search \*
 
+Integration
+-----------
+
+To use the provided front-end plugin you have to integrate the needed TypoScript. Add the following line to the
+TypoScript of your Site package. For example in the "TYPO3.NeosDemoTypo3Org" Site in the file Resources / Private /
+TypoScripts / Library / Root.ts2
+
+	include: resource://TechDivision.Neos.Search/Private/TypoScript/Root.ts2
+
+Now you are able to add the front end plugin in the backend.
+
+marita
+
+
+Search for other NodeTypes
+--------------------------
+
+It is possible to add other NodeTypes to the search index. Look into the Settings.yaml how to configure it.
+
+
+Search for other Models
+-----------------------
+
+By default this package provides a search for Nodes of the type "TYPO3/TYPO3CR/Domain/Model/Node". It is possible
+to add other models. Just implement the factory interfaces and extend them in your package. The Interfaces to
+implement and factories to extend are listed below:
+
+- \TechDivision\Neos\Search\Factory\ResultFactoryInterface
+- \TechDivision\Neos\Search\Factory\ResultFactory
+- \TechDivision\Neos\Search\Factory\DocumentFactoryInterface
+- \TechDivision\Neos\Search\Factory\DocumentFactory
+
+For using your own factories look into the Configuration/Objects.yaml how to configure that.
 
 Use other search backend
 ------------------------
 
 The search backend in the TechDivision.Search package is completely convertible. Look into it's documentations
 to learn how to add an other search backend implementation.
-For using your own search backend look into the Configuration/Objects.yaml
+For using your own search backend look into the Configuration/Objects.yaml how to configure that.
 
 
 Testing

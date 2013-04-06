@@ -1,4 +1,3 @@
-
 TechDivision:
   Neos:
     Search:
@@ -56,7 +55,7 @@ TechDivision:
       ResultNodeType: 'TYPO3.Neos.NodeTypes:Page'
 
 
-
+## This adds a backend module to Neos
 TYPO3:
   Neos:
     modules:
