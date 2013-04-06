@@ -1,5 +1,5 @@
-prototype(TechDivision.Neos.Search:SearchPlugin) < prototype(TYPO3.Neos.ContentTypes:Plugin)
-prototype(TechDivision.Neos.Search:SearchPlugin) {
+prototype(TechDivision.Neos.Search:FormPlugin) < prototype(TYPO3.Neos.NodeTypes:Plugin)
+prototype(TechDivision.Neos.Search:FormPlugin) {
      package = 'TechDivision.Neos.Search'
      controller = 'Plugin'
 }

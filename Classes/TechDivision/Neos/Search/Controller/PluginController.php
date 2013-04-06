@@ -39,8 +39,8 @@ class PluginController extends \TYPO3\Flow\Mvc\Controller\ActionController {
 	 */
 	public function searchAction(\TechDivision\Neos\Search\Domain\Model\Request $request){
 		$results = $this->searchProvider->search($request->getToken());
-		$this->view->assign('searchResults', $results);
-		$this->view->assign('searchRequest', $request);
+		$this->view->assign('results', $results);
+		$this->view->assign('request', $request);
 	}
 
 }

@@ -33,6 +33,10 @@ Add the following repositories to repository section like below:
 
 If you added the repositories you have to require this package with the following command in the instance folder:
 
+composer create-project --dev typo3/neos-base-distribution:dev-master TYPO3-Neos-1.0-dev
+cd TYPO3-Neos-1.0-dev
+composer update
+
 composer require techdivision/neos-search \*
 
 

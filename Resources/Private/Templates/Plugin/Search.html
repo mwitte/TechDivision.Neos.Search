@@ -1,14 +1,29 @@
 {namespace t=TYPO3\Neos\ViewHelpers}
 <div>
-    <h2>Search results:</h2>
-    <f:for each="{searchResults}" as="result">
-        <f:if condition="{settings.DetailResults}">
-            <f:then>
-                <f:render partial="Result/Detail" arguments="{result: result, request: searchRequest}"/>
-            </f:then>
-            <f:else>
-                <f:render partial="Result/Regular" arguments="{result: result, request: searchRequest}"/>
-            </f:else>
-        </f:if>
-    </f:for>
+	<f:render partial="Form/Small" arguments="{request: request}"/>
+	<f:if condition="{results -> f:count()} > 0">
+		<f:then>
+			<f:if condition="{results -> f:count()} == 1">
+				<f:then>
+					<h2>Found one result for "{request.token}":</h2>
+				</f:then>
+				<f:else>
+					<h2>Found {results -> f:count()} results for "{request.token}":</h2>
+				</f:else>
+			</f:if>
+			<f:for each="{results}" as="result">
+				<f:if condition="{settings.DetailResults}">
+					<f:then>
+						<f:render partial="Result/Detail" arguments="{result: result, request: request}"/>
+					</f:then>
+					<f:else>
+						<f:render partial="Result/Regular" arguments="{result: result, request: request}"/>
+					</f:else>
+				</f:if>
+			</f:for>
+		</f:then>
+		<f:else>
+			<h2>Couldn't find something for "{request.token}"</h2>
+		</f:else>
+	</f:if>
 </div>

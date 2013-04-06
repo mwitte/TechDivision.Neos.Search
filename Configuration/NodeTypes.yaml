@@ -1,0 +1,5 @@
+'TechDivision.Neos.Search:FormPlugin':
+  superTypes: ['TYPO3.Neos.NodeTypes:Plugin']
+  ui:
+    label: 'TD Search Form'
+    group: 'Plugins'

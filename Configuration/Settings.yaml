@@ -54,14 +54,3 @@ TechDivision:
       Workspace: 'live'
       ## do not change ## this contentType is required for Neos ##
       ResultContentType: 'TYPO3.Neos.NodeTypes:Page'
-
-# this registers the front-end plugin
-TYPO3:
-  TYPO3CR:
-    contentTypes:
-      'TechDivision.Neos.Search:SearchPlugin':
-        superTypes: ['TYPO3.Neos.ContentTypes:Plugin']
-        label: 'Searchbox'
-        group: 'Plugins'
-        icon: 'Images/Icons/White/zoom_icon-16.png'
-        darkIcon: 'Images/Icons/Black/zoom_icon-16.png'
