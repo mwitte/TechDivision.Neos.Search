@@ -16,16 +16,23 @@
 				</f:if>
 			</p>
 		</fieldset>
-
 	</div>
 	<div class="row t3-module-container indented">
 		<h2>Configured documents</h2>
 		<f:for each="{settings.Schema.DocumentTypes}" key="DocumentTypeName" as="DocumentType">
 			<fieldset class="span10">
 				<legend>{DocumentTypeName}</legend>
+				<f:for each="{DocumentType.NodeTypes}" key="NodeTypeName" as="NodeType">
+					<p>
+						<label>{NodeTypeName}</label>
+						<b>Properties:</b><br/>
+						<f:for each="{NodeType.properties}" key="propertyName" as="property">
+							{propertyName} <br/>
+						</f:for>
+					</p>
+				</f:for>
 			</fieldset>
 		</f:for>
-
 	</div>
 	<div class="form-actions form-footer">
 		<div class="pull-right">

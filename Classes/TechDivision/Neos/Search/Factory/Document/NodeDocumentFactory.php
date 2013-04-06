@@ -57,8 +57,8 @@ class NodeDocumentFactory implements \TechDivision\Neos\Search\Factory\DocumentF
 	public function createFromNode(\TYPO3\TYPO3CR\Domain\Model\Node $node, \TYPO3\TYPO3CR\Domain\Model\Workspace $workspace){
 		$document = new Document();
 		// only if the node is configured
-		if(array_key_exists($node->getNodeType()->getName(), $this->settings['Schema']['DocumentTypes']['TYPO3-TYPO3CR-Domain-Model-Node']['ContentTypes'])){
-			$typeConfiguration = $this->settings['Schema']['DocumentTypes']['TYPO3-TYPO3CR-Domain-Model-Node']['ContentTypes'][$node->getNodeType()->getName()];
+		if(array_key_exists($node->getNodeType()->getName(), $this->settings['Schema']['DocumentTypes']['TYPO3-TYPO3CR-Domain-Model-Node']['NodeTypes'])){
+			$typeConfiguration = $this->settings['Schema']['DocumentTypes']['TYPO3-TYPO3CR-Domain-Model-Node']['NodeTypes'][$node->getNodeType()->getName()];
 			if(array_key_exists('properties', $typeConfiguration) && is_array($typeConfiguration['properties'])){
 				$fieldFactory = new \TechDivision\Neos\Search\Factory\FieldFactory();
 				// iterate over properties
@@ -78,7 +78,7 @@ class NodeDocumentFactory implements \TechDivision\Neos\Search\Factory\DocumentF
 			// add the unique identifier to the document
 			$document->addField(new \TechDivision\Search\Field\Field($this->settings['Schema']['DocumentIdentifierField'], $node->getIdentifier()));
 			$document->addField(new \TechDivision\Search\Field\Field($this->settings['Schema']['DocumentTypeField'], 'TYPO3-TYPO3CR-Domain-Model-Node'));
-			//$document->addField(new \TechDivision\Search\Field\Field($configuration['DocumentTypes']['TYPO3-TYPO3CR-Domain-Model-Node']['ContentTypeField'], $node->getContentType()->getName()));
+			//$document->addField(new \TechDivision\Search\Field\Field($configuration['DocumentTypes']['TYPO3-TYPO3CR-Domain-Model-Node']['NodeTypeField'], $node->getNodeType()->getName()));
 			$document->addField(new \TechDivision\Search\Field\Field($this->settings['Schema']['PageNodeIdentifier'], $this->nodeService->getPageNode($node, $workspace)->getIdentifier()));
 			//var_dump($document);
 			return $document;

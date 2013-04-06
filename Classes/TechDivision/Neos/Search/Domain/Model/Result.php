@@ -17,7 +17,7 @@ use TYPO3\Flow\Annotations as Flow;
 class Result {
 
 	/**
-	 * This node is the lowest node of type TYPO3.Neos.ContentTypes:Page which contains the document's data
+	 * This node is the lowest node of type TYPO3.Neos.NodeTypes:Page which contains the document's data
 	 *
 	 * @var \TYPO3\TYPO3CR\Domain\Model\Node
 	 */

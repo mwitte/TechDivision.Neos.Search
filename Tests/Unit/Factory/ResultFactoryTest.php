@@ -46,7 +46,7 @@ class ResultFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 		$this->configuration = array(
 			'Schema' => array(
 				'PageNodeIdentifier' => 'pageId',
-				'DocumentTypeField' => 'contentType'
+				'DocumentTypeField' => 'NodeType'
 			)
 		);
 		$this->workspaceMock = $this->getMockBuilder('\TYPO3\TYPO3CR\Domain\Model\Workspace')->disableOriginalConstructor()->getMock();
@@ -66,7 +66,7 @@ class ResultFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	 * @depends testCreateFromDocumentWithoutField
 	 */
 	public function testCreateFromDocumentWithFieldWrongValue(){
-		$field = new \TechDivision\Search\Field\Field('contentType', 'wrongValue');
+		$field = new \TechDivision\Search\Field\Field('NodeType', 'wrongValue');
 		$this->document->addField($field);
 		$this->assertSame(null, $this->resultFactory->createFromDocument($this->document, $this->workspaceMock));
 	}
@@ -75,7 +75,7 @@ class ResultFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	 * @depends testCreateFromDocumentWithFieldWrongValue
 	 */
 	public function testCreateFromDocumentWithValidDocument(){
-		$field = new \TechDivision\Search\Field\Field('contentType', 'TYPO3-TYPO3CR-Domain-Model-Node');
+		$field = new \TechDivision\Search\Field\Field('NodeType', 'TYPO3-TYPO3CR-Domain-Model-Node');
 		$this->document->addField($field);
 		$this->assertSame($this->request, $this->resultFactory->createFromDocument($this->document, $this->workspaceMock));
 	}
@@ -96,7 +96,7 @@ class ResultFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	 * @depends testCreateMultipleWithoutDocuments
 	 */
 	public function testCreateMultipleWithValidDocument(){
-		$field = new \TechDivision\Search\Field\Field('contentType', 'TYPO3-TYPO3CR-Domain-Model-Node');
+		$field = new \TechDivision\Search\Field\Field('NodeType', 'TYPO3-TYPO3CR-Domain-Model-Node');
 		$this->document->addField($field);
 		$this->document->addField(new \TechDivision\Search\Field\Field('pageId', ''));
 		$documents = array($this->document);

@@ -79,7 +79,7 @@ class FieldFactory {
 	public function createFromMultipleConfigurations(){
 		$fields = array();
 		foreach($this->settings['Schema']['DocumentTypes'] as $documentTypeName => $documentType){
-			foreach($documentType['ContentTypes'] as $propertyName => $configuration){
+			foreach($documentType['NodeTypes'] as $propertyName => $configuration){
 				foreach($configuration['properties'] as $propertyConfiguration){
 					$field = $this->createFromConfiguration($propertyConfiguration, $this->settings['Schema']['FieldAliases'], $propertyName);
 					if($field){

@@ -40,8 +40,8 @@ class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 				'DocumentTypeField' => 'cat',
 				'DocumentTypes' => array(
 					'TYPO3-TYPO3CR-Domain-Model-Node' => array(
-						'ContentTypes' => array(
-							'MyContentType' => array(
+						'NodeTypes' => array(
+							'MyNodeType' => array(
 								'properties' => array(
 									'text' => array(
 										'fieldAlias' => 'textAlias',
@@ -60,29 +60,29 @@ class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 		);
 	}
 
-	private function getNodeMockWithProperty($contentTypeName, $propertyName, $propertyValue, $identifier = null){
+	private function getNodeMockWithProperty($NodeTypeName, $propertyName, $propertyValue, $identifier = null){
 
-		$contentTypeMock = $this->getMockBuilder('\TYPO3\TYPO3CR\Domain\Model\NodeType', array("getName"))->disableOriginalConstructor()->getMock();
-		$contentTypeMock->expects($this->any())->method("getName")->will($this->returnValue($contentTypeName));
+		$NodeTypeMock = $this->getMockBuilder('\TYPO3\TYPO3CR\Domain\Model\NodeType', array("getName"))->disableOriginalConstructor()->getMock();
+		$NodeTypeMock->expects($this->any())->method("getName")->will($this->returnValue($NodeTypeName));
 
 		$this->workspaceMock = $this->getMockBuilder('\TYPO3\TYPO3CR\Domain\Model\Workspace')->disableOriginalConstructor()->getMock();
 
 		$nodeMock = $this->getMockBuilder('\TYPO3\TYPO3CR\Domain\Model\Node', array("getProperties", "getProperty", "getNodeType", "getIdentifier"))->disableOriginalConstructor()->getMock();
 		$nodeMock->expects($this->any())->method("getProperties")->will($this->returnValue(array($propertyName => null)));
 		$nodeMock->expects($this->any())->method("getProperty")->will($this->returnValue($propertyValue));
-		$nodeMock->expects($this->any())->method("getNodeType")->will($this->returnValue($contentTypeMock));
+		$nodeMock->expects($this->any())->method("getNodeType")->will($this->returnValue($NodeTypeMock));
 		$nodeMock->expects($this->any())->method("getIdentifier")->will($this->returnValue($identifier));
 		return $nodeMock;
 	}
 
 	public function testCreateFromNodeWithEmptyConfiguration(){
-		$nodeMock = $this->getNodeMockWithProperty('ContentType', 'text', 'value');
+		$nodeMock = $this->getNodeMockWithProperty('NodeType', 'text', 'value');
 		$nodeMock->getNodeType();
 		$configuration = array(
 			'Schema' => array(
 				'DocumentTypes' => array(
 					'TYPO3-TYPO3CR-Domain-Model-Node' => array(
-						'ContentTypes' => array()
+						'NodeTypes' => array()
 					)
 				),
 				'FieldAliases' => array(),
@@ -96,14 +96,14 @@ class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	/**
 	 * @depends testCreateFromNodeWithEmptyConfiguration
 	 */
-	public function testCreateFromNodeWithContentTypeNotConfigured(){
-		$nodeMock = $this->getNodeMockWithProperty('ContentType', 'text', 'value');
+	public function testCreateFromNodeWithNodeTypeNotConfigured(){
+		$nodeMock = $this->getNodeMockWithProperty('NodeType', 'text', 'value');
 		$configuration = array(
 			'Schema' => array(
 				'DocumentTypes' => array(
 					'TYPO3-TYPO3CR-Domain-Model-Node' => array(
-						'ContentTypes' => array(
-							'OtherContentType' => null
+						'NodeTypes' => array(
+							'OtherNodeType' => null
 						)
 					)
 				),
@@ -116,16 +116,16 @@ class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	}
 
 	/**
-	 * @depends testCreateFromNodeWithContentTypeNotConfigured
+	 * @depends testCreateFromNodeWithNodeTypeNotConfigured
 	 */
-	public function testCreateFromNodeWithContentTypeConfiguredEmptyProperties(){
-		$nodeMock = $this->getNodeMockWithProperty('MyContentType', 'text', 'value');
+	public function testCreateFromNodeWithNodeTypeConfiguredEmptyProperties(){
+		$nodeMock = $this->getNodeMockWithProperty('MyNodeType', 'text', 'value');
 		$configuration = array(
 			'Schema' => array(
 				'DocumentTypes' => array(
 					'TYPO3-TYPO3CR-Domain-Model-Node' => array(
-						'ContentTypes' => array(
-							'MyContentType' => array(
+						'NodeTypes' => array(
+							'MyNodeType' => array(
 								'properties' => null
 							)
 						)
@@ -140,10 +140,10 @@ class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	}
 
 	/**
-	 * @depends testCreateFromNodeWithContentTypeNotConfigured
+	 * @depends testCreateFromNodeWithNodeTypeNotConfigured
 	 */
-	public function testCreateFromNodeWithContentTypeConfiguredMissingField(){
-		$nodeMock = $this->getNodeMockWithProperty('MyContentType', 'text', 'myValue', 21);
+	public function testCreateFromNodeWithNodeTypeConfiguredMissingField(){
+		$nodeMock = $this->getNodeMockWithProperty('MyNodeType', 'text', 'myValue', 21);
 
 		// remove the matching fieldName
 		unset($this->completeConfiguration['Schema']['FieldAliases']['textAlias']);
@@ -157,16 +157,16 @@ class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	}
 
 	/**
-	 * @depends testCreateFromNodeWithContentTypeNotConfigured
+	 * @depends testCreateFromNodeWithNodeTypeNotConfigured
 	 */
-	public function testCreateFromNodeWithContentTypeConfigured(){
+	public function testCreateFromNodeWithNodeTypeConfigured(){
 		$nodeServiceMock = $this->getMock('TechDivision\Neos\Search\Service', array('getPageNode'));
 		$pageNodeMock = $this->getNodeMockWithProperty('PageNodeMock', 'subject', 'myValue', 21);
 		$nodeServiceMock->expects($this->any())->method('getPageNode')->will($this->returnValue($pageNodeMock));
 
 		$this->inject($this->nodeDocumentFactory, 'nodeService', $nodeServiceMock);
 
-		$nodeMock = $this->getNodeMockWithProperty('MyContentType', 'text', 'myValue', 21);
+		$nodeMock = $this->getNodeMockWithProperty('MyNodeType', 'text', 'myValue', 21);
 
 		$field = new \TechDivision\Search\Field\Field('text', 'myValue');
 		$document = new \TechDivision\Search\Document\Document();
@@ -179,9 +179,9 @@ class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	}
 
 	/**
-	 * @depends testCreateFromNodeWithContentTypeConfiguredMissingField
+	 * @depends testCreateFromNodeWithNodeTypeConfiguredMissingField
 	 */
-	public function testCreateFromNodeWithContentTypeConfiguredWithFieldBoost(){
+	public function testCreateFromNodeWithNodeTypeConfiguredWithFieldBoost(){
 		$nodeServiceMock = $this->getMock('TechDivision\Neos\Search\Service', array('getPageNode'));
 		$pageNodeMock = $this->getNodeMockWithProperty('PageNodeMock', 'subject', 'myValue', 21);
 		$nodeServiceMock->expects($this->any())->method('getPageNode')->will($this->returnValue($pageNodeMock));
@@ -189,9 +189,9 @@ class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 		$this->inject($this->nodeDocumentFactory, 'nodeService', $nodeServiceMock);
 
 
-		$nodeMock = $this->getNodeMockWithProperty('MyContentType', 'text', 'myValue', 21);
+		$nodeMock = $this->getNodeMockWithProperty('MyNodeType', 'text', 'myValue', 21);
 		// modify configuration
-		$this->completeConfiguration['Schema']['DocumentTypes']['TYPO3-TYPO3CR-Domain-Model-Node']['ContentTypes']['MyContentType']['documentBoost'] = 1.35;
+		$this->completeConfiguration['Schema']['DocumentTypes']['TYPO3-TYPO3CR-Domain-Model-Node']['NodeTypes']['MyNodeType']['documentBoost'] = 1.35;
 
 		$document = new \TechDivision\Search\Document\Document();
 		$document->addField(new \TechDivision\Search\Field\Field('text', 'myValue'));
@@ -205,7 +205,7 @@ class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	}
 
 	/**
-	 * @depends testCreateFromNodeWithContentTypeConfiguredWithFieldBoost
+	 * @depends testCreateFromNodeWithNodeTypeConfiguredWithFieldBoost
 	 */
 	public function testGetAllDocumentsNothingFound(){
 		$nodeRepositoryMock = $this->getMockBuilder('TYPO3\TYPO3CR\Domain\Repository\NodeRepository', array('findAll'))->disableOriginalConstructor()->getMock();
@@ -217,7 +217,7 @@ class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 
 	public function testGetAllDocumentsNodeFound(){
 		$nodeRepositoryMock = $this->getMockBuilder('TYPO3\TYPO3CR\Domain\Repository\NodeRepository', array('findAll'))->disableOriginalConstructor()->getMock();
-		$nodeMock = $this->getNodeMockWithProperty('MyContentType', 'text', 'myValue', 21);
+		$nodeMock = $this->getNodeMockWithProperty('MyNodeType', 'text', 'myValue', 21);
 		$nodeRepositoryMock->expects($this->any())->method('findAll')->will($this->returnValue(array($nodeMock)));
 		$this->inject($this->nodeDocumentFactory, 'nodeRepository', $nodeRepositoryMock);
 
@@ -235,7 +235,7 @@ class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 		$document->setBoost(1.35);
 
 		// modify configuration
-		$this->completeConfiguration['Schema']['DocumentTypes']['TYPO3-TYPO3CR-Domain-Model-Node']['ContentTypes']['MyContentType']['documentBoost'] = 1.35;
+		$this->completeConfiguration['Schema']['DocumentTypes']['TYPO3-TYPO3CR-Domain-Model-Node']['NodeTypes']['MyNodeType']['documentBoost'] = 1.35;
 		$this->inject($this->nodeDocumentFactory, 'settings', $this->completeConfiguration);
 
 

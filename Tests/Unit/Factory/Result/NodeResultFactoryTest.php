@@ -26,14 +26,14 @@ class NodeResultFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 		$this->inject($this->nodeResultFactory, 'nodeService', $nodeServiceMock);
 	}
 
-	private function getContentTypeMock($contentTypeName){
-		$contentType = $this->getMockBuilder('\TYPO3\TYPO3CR\Domain\Model\ContentType', array('getName'))->disableOriginalConstructor()->getMock();
-		$contentType->expects($this->any())->method('getName')->will($this->returnValue($contentTypeName));
-		return $contentType;
+	private function getNodeTypeMock($NodeTypeName){
+		$NodeType = $this->getMockBuilder('\TYPO3\TYPO3CR\Domain\Model\NodeType', array('getName'))->disableOriginalConstructor()->getMock();
+		$NodeType->expects($this->any())->method('getName')->will($this->returnValue($NodeTypeName));
+		return $NodeType;
 	}
-	private function getSingleNode($contentTypeName){
-		$node = $this->getMockBuilder('\TYPO3\TYPO3CR\Domain\Model\Node', array('getContentType'))->disableOriginalConstructor()->getMock();
-		$node->expects($this->any())->method('getContentType')->will($this->returnValue($this->getContentTypeMock($contentTypeName)));
+	private function getSingleNode($NodeTypeName){
+		$node = $this->getMockBuilder('\TYPO3\TYPO3CR\Domain\Model\Node', array('getNodeType'))->disableOriginalConstructor()->getMock();
+		$node->expects($this->any())->method('getNodeType')->will($this->returnValue($this->getNodeTypeMock($NodeTypeName)));
 		return $node;
 	}
 

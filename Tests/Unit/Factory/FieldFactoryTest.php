@@ -78,7 +78,7 @@ class FieldFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 				'DocumentTypeField' => 'category',
 				'DocumentTypes' => array(
 					'TYPO3-TYPO3CR-Domain-Model-Node' => array(
-						'ContentTypes' => array(
+						'NodeTypes' => array(
 							'x' => array(
 								'properties' =>
 								array(

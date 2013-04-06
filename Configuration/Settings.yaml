@@ -13,10 +13,10 @@ TechDivision:
         # the documentTypes which get indexed
         DocumentTypes:
           TYPO3-TYPO3CR-Domain-Model-Node:
-            # Field which stores the node contentType
-            ContentTypeField: 'comments'
-            ContentTypes:
-              # Add here every contentType with their properties which should get indexed by solr
+            # Field which stores the node NodeType
+            NodeTypeField: 'comments'
+            NodeTypes:
+              # Add here every NodeType with their properties which should get indexed by solr
               # The boosts(float) are optional
               TYPO3.Neos.NodeTypes:Text:
                 documentBoost: 1.0
@@ -52,8 +52,8 @@ TechDivision:
 
       ## do not change ## The node's workspace which get indexed and are findable
       Workspace: 'live'
-      ## do not change ## this contentType is required for Neos ##
-      ResultContentType: 'TYPO3.Neos.NodeTypes:Page'
+      ## do not change ## this NodeType is required for Neos ##
+      ResultNodeType: 'TYPO3.Neos.NodeTypes:Page'
 
 
 

@@ -64,8 +64,8 @@ Design decisions
 As search interface I used the TechDivision.Search package. The TechDivision.Search package provides a
 generic search interface for (probably) various search backends.
 
-This package is for TYPO3 Neos. Pages in Neos are represented as Nodes with the contentType
-TYPO3.Neos.ContentTypes:Page. So every search result got it's "Page Node". By default only Nodes are supported for
+This package is for TYPO3 Neos. Pages in Neos are represented as Nodes with the NodeType
+TYPO3.Neos.NodeTypes:Page. So every search result got it's "Page Node". By default only Nodes are supported for
 indexing and searching. Because there are various interfaces used and the implementation is selected in Objects.yaml
 there is the possibility to index and search for other models by extending the existing source in your own package.
 
