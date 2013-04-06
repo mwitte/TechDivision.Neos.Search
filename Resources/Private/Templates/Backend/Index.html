@@ -1,0 +1,44 @@
+<f:layout name="BackendSubModule" />
+
+<f:section name="content">
+	<div class="row t3-module-container indented">
+		<fieldset class="span10">
+			<legend>Info</legend>
+			<p>
+				<label>Provider needs documents for index</label>
+				<f:if condition="{providerNeedsInputDocs}">
+					<f:then>
+						Yes
+					</f:then>
+					<f:else>
+						No, adding, updating and deleting of documents is disabled
+					</f:else>
+				</f:if>
+			</p>
+		</fieldset>
+
+	</div>
+	<div class="row t3-module-container indented">
+		<h2>Configured documents</h2>
+		<f:for each="{settings.Schema.DocumentTypes}" key="DocumentTypeName" as="DocumentType">
+			<fieldset class="span10">
+				<legend>{DocumentTypeName}</legend>
+			</fieldset>
+		</f:for>
+
+	</div>
+	<div class="form-actions form-footer">
+		<div class="pull-right">
+			<f:if condition="{providerNeedsInputDocs}">
+				<f:link.action action="updateAllDocuments" class="btn btn-warning t3-button batch-action" title="Add/Update nodes in search index">
+					<i class="icon-trash icon-white"></i>
+					Add/Update nodes in search index
+				</f:link.action>
+				<f:link.action action="removeAllDocuments" class="btn btn-danger t3-button batch-action" title="Remove nodes from search index">
+					<i class="icon-trash icon-white"></i>
+					Remove nodes from search index
+				</f:link.action>
+			</f:if>
+		</div>
+	</div>
+</f:section>

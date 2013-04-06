@@ -54,3 +54,16 @@ TechDivision:
       Workspace: 'live'
       ## do not change ## this contentType is required for Neos ##
       ResultContentType: 'TYPO3.Neos.NodeTypes:Page'
+
+
+
+TYPO3:
+  Neos:
+    modules:
+      administration:
+        submodules:
+          techdivisionneossearch:
+            label: 'TechDivision Neos Search'
+            controller: '\TechDivision\Neos\Search\Controller\BackendController'
+            description: 'Configuration and administration for the neos search'
+            icon: 'resource://TechDivision.Neos.Search/Public/Images/Icons/td-logo-24.png'
