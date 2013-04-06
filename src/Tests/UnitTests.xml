@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<phpunit strict="true"
+		bootstrap="/var/www/flow/TYPO3-Neos-1.0-dev/Build/BuildEssentials/PhpUnit/UnitTestBootstrap.php"
+		convertErrorsToExceptions="true"
+		convertNoticesToExceptions="true"
+		convertWarningsToExceptions="true"
+		timeoutForSmallTests="0">
+	<testsuites>
+		<testsuite name="All tests">
+			<directory>Unit</directory>
+		</testsuite>
+	</testsuites>
+	<filter>
+		<whitelist>
+			<directory suffix=".php">../Classes</directory>
+		</whitelist>
+	</filter>
+	<logging>
+		<log type="junit" target="../Reports/UnitTests.xml" logIncompleteSkipped="false"/>
+		<log type="testdox-text" target="../Reports/UnitTestDox.txt"/>
+		<log type="coverage-html" target="../Reports/UnitCoverage" charset="UTF-8"
+			 highlight="false" lowUpperBound="35" highLowerBound="70"/>
+	</logging>
+</phpunit>

@@ -18,20 +18,20 @@ TechDivision:
             ContentTypes:
               # Add here every contentType with their properties which should get indexed by solr
               # The boosts(float) are optional
-              TYPO3.Neos.ContentTypes:Text:
+              TYPO3.Neos.NodeTypes:Text:
                 documentBoost: 1.0
                 properties:
                   text:
                     # alias from ...Schema.FieldAliases few lines below
                     fieldAlias: 'content'
                     fieldBoost: 1
-              TYPO3.Neos.ContentTypes:Headline:
+              TYPO3.Neos.NodeTypes:Headline:
                 properties:
                   title:
                     # alias from ...Schema.FieldAliases few lines below
                     fieldAlias: 'content'
                     fieldBoost: 1
-              TYPO3.Neos.ContentTypes:Page:
+              TYPO3.Neos.NodeTypes:Page:
                 properties:
                   title:
                     # alias from ...Schema.FieldAliases few lines below
@@ -53,7 +53,7 @@ TechDivision:
       ## do not change ## The node's workspace which get indexed and are findable
       Workspace: 'live'
       ## do not change ## this contentType is required for Neos ##
-      ResultContentType: 'TYPO3.Neos.ContentTypes:Page'
+      ResultContentType: 'TYPO3.Neos.NodeTypes:Page'
 
 # this registers the front-end plugin
 TYPO3:

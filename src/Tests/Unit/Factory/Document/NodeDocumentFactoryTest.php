@@ -62,21 +62,22 @@ class NodeDocumentFactoryTest extends \TYPO3\Flow\Tests\UnitTestCase {
 
 	private function getNodeMockWithProperty($contentTypeName, $propertyName, $propertyValue, $identifier = null){
 
-		$contentTypeMock = $this->getMockBuilder('\TYPO3\TYPO3CR\Domain\Model\ContentType', array("getName"))->disableOriginalConstructor()->getMock();
+		$contentTypeMock = $this->getMockBuilder('\TYPO3\TYPO3CR\Domain\Model\NodeType', array("getName"))->disableOriginalConstructor()->getMock();
 		$contentTypeMock->expects($this->any())->method("getName")->will($this->returnValue($contentTypeName));
 
 		$this->workspaceMock = $this->getMockBuilder('\TYPO3\TYPO3CR\Domain\Model\Workspace')->disableOriginalConstructor()->getMock();
 
-		$nodeMock = $this->getMockBuilder('\TYPO3\TYPO3CR\Domain\Model\Node', array("getProperties", "getProperty", "getContentType", "getIdentifier"))->disableOriginalConstructor()->getMock();
+		$nodeMock = $this->getMockBuilder('\TYPO3\TYPO3CR\Domain\Model\Node', array("getProperties", "getProperty", "getNodeType", "getIdentifier"))->disableOriginalConstructor()->getMock();
 		$nodeMock->expects($this->any())->method("getProperties")->will($this->returnValue(array($propertyName => null)));
 		$nodeMock->expects($this->any())->method("getProperty")->will($this->returnValue($propertyValue));
-		$nodeMock->expects($this->any())->method("getContentType")->will($this->returnValue($contentTypeMock));
+		$nodeMock->expects($this->any())->method("getNodeType")->will($this->returnValue($contentTypeMock));
 		$nodeMock->expects($this->any())->method("getIdentifier")->will($this->returnValue($identifier));
 		return $nodeMock;
 	}
 
 	public function testCreateFromNodeWithEmptyConfiguration(){
 		$nodeMock = $this->getNodeMockWithProperty('ContentType', 'text', 'value');
+		$nodeMock->getNodeType();
 		$configuration = array(
 			'Schema' => array(
 				'DocumentTypes' => array(

@@ -83,7 +83,7 @@ class NodeService{
 	 * @return null|\TYPO3\TYPO3CR\Domain\Model\Node
 	 */
 	public function getPageNode(Node $node, $workspace){
-		if($node->getContentType()->getName() == $this->settings['ResultContentType']){
+		if($node->getNodeType()->getName() == $this->settings['ResultContentType']){
 			return $node;
 		}
 		$parentNode = $this->nodeRepository->findOneByPath($node->getParentPath(), $workspace);

@@ -12,6 +12,30 @@ This package uses the TechDivision.Search package as search backend interface wh
 extension.
 
 
+Installation
+------------
+
+This package and it's dependency the "TechDivision.Search" package are not added to packagist.org so far. So you have to
+edit the composer.json of your Neos instance in the base folder to add the needed repositories.
+
+Add the following repositories to repository section like below:
+
+	"repositories": [
+		{
+			"type": "git",
+			"url": "http://192.168.1.106/Neos.git"
+		},
+		{
+			"type": "git",
+			"url": "http://192.168.1.106/Search.git"
+		}
+	],
+
+If you added the repositories you have to require this package with the following command in the instance folder:
+
+composer require techdivision/neos-search \*
+
+
 Use other search backend
 ------------------------
 

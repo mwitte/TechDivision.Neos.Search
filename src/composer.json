@@ -1,15 +1,24 @@
 {
 	"name":"techdivision/neos-search",
 	"type":"typo3-flow-package",
-	"description":"",
-	"require":
-	{
-		"typo3\/flow":"*"
-	},
-	"autoload":
-	{
-		"psr-0":
+	"description":"Provides as front-end search interface for TYPO3 Neos",
+	"license": "GPL-3.0+",
+	"authors": [
 		{
+			"name": "Matthias Witte",
+			"email": "me@matthias-witte.net",
+			"homepage": "http://www.matthias-witte.net",
+			"role": "Developer"
+		}
+	],
+	"version": "0.1.0-dev",
+	"minimum-stability": "dev",
+	"require":{
+		"typo3/neos": "*",
+		"techdivision/search": "*"
+	},
+	"autoload":{
+		"psr-0":{
 			"TechDivision\\Neos\\Search":"Classes"
 		}
 	}

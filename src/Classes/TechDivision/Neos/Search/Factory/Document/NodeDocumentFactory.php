@@ -57,8 +57,8 @@ class NodeDocumentFactory implements \TechDivision\Neos\Search\Factory\DocumentF
 	public function createFromNode(\TYPO3\TYPO3CR\Domain\Model\Node $node, \TYPO3\TYPO3CR\Domain\Model\Workspace $workspace){
 		$document = new Document();
 		// only if the node is configured
-		if(array_key_exists($node->getContentType()->getName(), $this->settings['Schema']['DocumentTypes']['TYPO3-TYPO3CR-Domain-Model-Node']['ContentTypes'])){
-			$typeConfiguration = $this->settings['Schema']['DocumentTypes']['TYPO3-TYPO3CR-Domain-Model-Node']['ContentTypes'][$node->getContentType()->getName()];
+		if(array_key_exists($node->getNodeType()->getName(), $this->settings['Schema']['DocumentTypes']['TYPO3-TYPO3CR-Domain-Model-Node']['ContentTypes'])){
+			$typeConfiguration = $this->settings['Schema']['DocumentTypes']['TYPO3-TYPO3CR-Domain-Model-Node']['ContentTypes'][$node->getNodeType()->getName()];
 			if(array_key_exists('properties', $typeConfiguration) && is_array($typeConfiguration['properties'])){
 				$fieldFactory = new \TechDivision\Neos\Search\Factory\FieldFactory();
 				// iterate over properties

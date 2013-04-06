@@ -43,13 +43,13 @@ class NodeServiceTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	}
 
 	private function getContentTypeMock($contentTypeName){
-		$contentType = $this->getMockBuilder('\TYPO3\TYPO3CR\Domain\Model\ContentType', array('getName'))->disableOriginalConstructor()->getMock();
+		$contentType = $this->getMockBuilder('\TYPO3\TYPO3CR\Domain\Model\NodeType', array('getName'))->disableOriginalConstructor()->getMock();
 		$contentType->expects($this->any())->method('getName')->will($this->returnValue($contentTypeName));
 		return $contentType;
 	}
 	private function getSingleNode($contentTypeName, $isAccessible = false, $isVisible = false){
-		$node = $this->getMockBuilder('\TYPO3\TYPO3CR\Domain\Model\Node', array('getContentType', 'isAccessible', 'isVisible'))->disableOriginalConstructor()->getMock();
-		$node->expects($this->any())->method('getContentType')->will($this->returnValue($this->getContentTypeMock($contentTypeName)));
+		$node = $this->getMockBuilder('\TYPO3\TYPO3CR\Domain\Model\Node', array('getNodeType', 'isAccessible', 'isVisible'))->disableOriginalConstructor()->getMock();
+		$node->expects($this->any())->method('getNodeType')->will($this->returnValue($this->getContentTypeMock($contentTypeName)));
 		$node->expects($this->any())->method('isAccessible')->will($this->returnValue($isAccessible));
 		$node->expects($this->any())->method('isVisible')->will($this->returnValue($isVisible));
 		return $node;
