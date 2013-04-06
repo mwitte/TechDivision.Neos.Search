@@ -54,7 +54,6 @@ TechDivision:
       ## do not change ## this NodeType is required for Neos ##
       ResultNodeType: 'TYPO3.Neos.NodeTypes:Page'
 
-
 ## This adds a backend module to Neos
 TYPO3:
   Neos:

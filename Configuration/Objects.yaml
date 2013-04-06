@@ -1,14 +1,11 @@
-# change injected properties for class..
-TechDivision\Neos\Search\Provider\SearchProvider:
-  properties:
-    # define the implementation for the property
-    # works only with classes which implement the selected interface
-    searchProvider:
-      # interface: \TechDivision\Search\Provider\ProviderInterface
-      object: 'TechDivision\Search\Provider\Solr\Provider'
-    resultFactory:
-      # interface: \TechDivision\Neos\Search\Factory\ResultFactoryInterface
-      object: 'TechDivision\Neos\Search\Factory\ResultFactory'
-    documentFactory:
-      # interface: \TechDivision\Neos\Search\Factory\DocumentFactoryInterface
-      object: 'TechDivision\Neos\Search\Factory\DocumentFactory'
+# change the implementation for interfaces by configuration:
+
+# decide here which search backend provider will be used
+TechDivision\Search\Provider\ProviderInterface:
+  className: TechDivision\Search\Provider\Solr\Rest\Provider
+
+TechDivision\Neos\Search\Factory\ResultFactoryInterface:
+  className: TechDivision\Neos\Search\Factory\ResultFactory
+
+TechDivision\Neos\Search\Factory\DocumentFactoryInterface:
+  className: TechDivision\Neos\Search\Factory\DocumentFactory

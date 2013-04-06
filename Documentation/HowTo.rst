@@ -87,6 +87,11 @@ This command controller was only for simple testing and debugging and should get
 The functional tests are currently not suitable because in testing context the database is set up but not filled
 with nodes. Probably i'll find a solution for this.
 
+The functional tests are currently not suitable, the last changes in the TYPO3 Flow framework made it nearly impossible to
+cover the code with 100%. There is already an issue for that in forge to fix it.
+
+https://forge.typo3.org/issues/46974
+
 
 Design decisions
 ----------------

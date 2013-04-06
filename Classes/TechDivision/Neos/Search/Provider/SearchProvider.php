@@ -113,7 +113,9 @@ class SearchProvider {
 			foreach($documents as $document){
 				$identifierField = $document->getField($this->settings['Schema']['DocumentIdentifierField']);
 				if($identifierField){
-					$this->provider->removeDocumentByIdentifier($identifierField->getValue());
+					$this->provider->removeDocumentByField(
+						new \TechDivision\Search\Field\Field($identifierField->getName(), $identifierField->getValue())
+					);
 					$docCount++;
 				}
 			}
