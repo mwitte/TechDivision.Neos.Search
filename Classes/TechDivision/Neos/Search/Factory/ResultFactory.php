@@ -2,7 +2,7 @@
 namespace TechDivision\Neos\Search\Factory;
 
 /*                                                                        *
- * This belongs to the TYPO3 Flow package "TechDivision.Neos.Search"  *
+ * This belongs to the TYPO3 Flow package "TechDivision.Neos.Search"      *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU General Public License, either version 3 of the   *
@@ -43,7 +43,7 @@ class ResultFactory implements ResultFactoryInterface{
 
 	/**
 	 * This Method delegates the creation of responseObjects, you may extend this class and overwrite this method
-	 * to add you own results
+	 * to add your own results
 	 *
 	 * @param \TechDivision\Search\Document\DocumentInterface $document
 	 * @param \TYPO3\TYPO3CR\Domain\Model\Workspace $workspace

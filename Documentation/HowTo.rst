@@ -50,7 +50,7 @@ Now you are able to add the front end plugin in the backend.
 
 ### Known Bugs
 #### Adding the FE Plugin to a page in the backend throws an ExtDirect error
-This is not my fault. I think there is still a bug in Neos. Just refresh the page after adding and the plugin got
+I think there is still a bug in Neos. Just refresh the page after adding and the plugin got
 added and everything works.
 
 

@@ -2,7 +2,7 @@
 namespace TechDivision\Neos\Search\Provider;
 
 /*                                                                        *
- * This belongs to the TYPO3 Flow package "TechDivision.Neos.Search"  *
+ * This belongs to the TYPO3 Flow package "TechDivision.Neos.Search"      *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU General Public License, either version 3 of the   *
