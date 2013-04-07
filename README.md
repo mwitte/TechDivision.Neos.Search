@@ -1,21 +1,21 @@
 TechDivision.Neos.Search
 ========================
 
-The TechDivision.Neos.Search package provides a frontend search interface for TYPO3 Neos. TYPO3 Neos
-Nodes get indexed are search and findable. The results depends on the context. A visitor cannot find
-Nodes which are not in the live workspace(default). Publishing pages with node changes automatically update
-the node documents in index. There is no cron job needed to keep the index up to date. There is a command controller
-to add/update/remove all nodes in index. There is also a backend module provided for this.
+This package provides a frontend search interface for TYPO3 Neos. TYPO3 Neos Nodes get indexed are search and findable.
+The results depends on the context. A visitor cannot find Nodes which are not in the live workspace(default). Publishing
+pages with node changes automatically update the node documents in index. There is no cron job needed to keep the index
+up to date. There is a command controller to add/update/remove all nodes in index.  There is also a backend module
+provided for this.
 
-This package uses the TechDivision.Search package as search backend interface which requires by default the solr php
-extension.
+This package uses the [TechDivision.Search](https://github.com/mwitte/TechDivision.Search) package as search backend
+interface which requires by default the solr php extension.
 
 
 Installation
 ------------
 
-This package and it's dependency the "TechDivision.Search" package are not added to packagist.org so far. So you have to
-add some repositories to the composer.json of your Neos base distribution(your Neos instance).
+This package and it's dependency the "TechDivision.Search" package are not added to [packagist.org](https://packagist.org/)
+so far. So you have to add some repositories to the composer.json of your Neos base distribution(your Neos instance).
 
 Add the following repositories to repository section like below:
 
@@ -93,7 +93,7 @@ with nodes. Probably i'll find a solution for this.
 
 ### Last change in TYPO3 Flow broke coverage possibility for functional tests
 The functional tests are currently not suitable, the last changes in the TYPO3 Flow framework made it nearly impossible to
-cover the code with 100%. There is already an issue for that in forge to fix it.
+cover the code with 100%. There is already an issue for that in forge to fix it:
 
 https://forge.typo3.org/issues/46974
 
@@ -101,8 +101,8 @@ https://forge.typo3.org/issues/46974
 Design decisions
 ----------------
 
-As search interface I used the TechDivision.Search package. The TechDivision.Search package provides a
-generic search interface for (probably) various search backends.
+As search interface it uses the [TechDivision.Search](https://github.com/mwitte/TechDivision.Search) package.
+The TechDivision.Search package provides a generic search interface for (probably) various search backends.
 
 This package is for TYPO3 Neos. Pages in Neos are represented as Nodes with the NodeType
 TYPO3.Neos.NodeTypes:Page. So every search result got it's "Page Node". By default only Nodes are supported for
@@ -116,7 +116,7 @@ it's page reduced by page.
 Why this namespace?
 -------------------
 
-Until now this is a non-corporate project i made in my leisure time. I chose this namespace to participate at a company
+Until now this is a non-corporate project I made in my leisure time. I chose this namespace to participate at a company
 internal contest.
 
 
@@ -129,4 +129,4 @@ It is free software; you can redistribute it and/or modify it under the terms of
 either version 3 of the License, or (at your option) any later version.
 
 Copyright (C) 2013 Matthias Witte
-http://www.matthias-witte.net
+[http://www.matthias-witte.net](http://www.matthias-witte.net)

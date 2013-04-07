@@ -113,11 +113,11 @@ TYPO3:
             <replacevalue><![CDATA["repositories": [
         {
             "type": "git",
-            "url": "http://192.168.1.106/Neos.git"
+            "url": "https://github.com/mwitte/TechDivision.Search"
         },
         {
             "type": "git",
-            "url": "http://192.168.1.106/Search.git"
+            "url": "https://github.com/mwitte/TechDivision.Neos.Search"
         }
     ],
     "require": {]]></replacevalue>
