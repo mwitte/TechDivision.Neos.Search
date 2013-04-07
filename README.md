@@ -13,23 +13,9 @@ This package uses the [TechDivision.Search](https://github.com/mwitte/TechDivisi
 Installation
 ------------
 
-This package and it's dependency the "TechDivision.Search" package are not added to [packagist.org](https://packagist.org/)
-so far. So you have to add some repositories to the composer.json of your Neos base distribution(your Neos instance).
-
-Add the following repositories to repository section like below:
-
-	"repositories": [
-		{
-			"type": "git",
-			"url": "https://github.com/mwitte/TechDivision.Search"
-		},
-		{
-			"type": "git",
-			"url": "https://github.com/mwitte/TechDivision.Neos.Search"
-		}
-	]
-
-If you added the repositories you have to require this package with the following command in the instance folder:
+This package and it's dependency the "TechDivision.Search" package have been added to [packagist.org](https://packagist.org/).
+Just require this package with the following command in the instance folder. It's dependency "TechDivision.Search" get's
+automatically installed too.
 
 	composer require techdivision/neos-search \*
 

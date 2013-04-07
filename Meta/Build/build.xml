@@ -24,7 +24,6 @@
     <!-- Installs the packages                                                -->
     <!-- ==================================================================== -->
     <target name="install-packages">
-        <antcall target="add-repositories"/>
         <antcall target="require-packages"/>
         <antcall target="integrate-fe-plugin"/>
     </target>
@@ -102,27 +101,6 @@ TYPO3:
     </target>
 
 
-
-    <!-- ==================================================================== -->
-    <!-- Targets for installing packages                                      -->
-    <!-- ==================================================================== -->
-
-    <target name="add-repositories">
-        <replace file="${instance.dir}/composer.json">
-            <replacetoken><![CDATA["require": {]]></replacetoken>
-            <replacevalue><![CDATA["repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/mwitte/TechDivision.Search"
-        },
-        {
-            "type": "git",
-            "url": "https://github.com/mwitte/TechDivision.Neos.Search"
-        }
-    ],
-    "require": {]]></replacevalue>
-        </replace>
-    </target>
 
     <target name="require-packages">
         <echo message="Command: composer require techdivision/neos-search \*"/>
