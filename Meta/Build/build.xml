@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="TechDivision.Neos.Search" default="deploy" basedir="../../../../../../Volumes/Files/Workspace/Flow/Application/TechDivision.Neos.Search/Meta">
+<project name="TechDivision.Neos.Search" basedir=".">
 	<property file="${basedir}/build.properties"/>
 	<property file="${basedir}/build.default.properties"/>
     <property file="${basedir}/build.mac.properties"/>
