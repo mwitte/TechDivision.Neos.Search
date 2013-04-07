@@ -7,8 +7,7 @@ Nodes which are not in the live workspace(default). Publishing pages with node c
 the node documents in index. There is no cron job needed to keep the index up to date. There is a command controller
 to add/update/remove all nodes in index. There is also a backend module provided for this.
 
-This package uses the TechDivision.Search package as search backend interface which requires by default the solr php
-extension.
+This package uses the TechDivision.Search package as search backend interface.
 
 
 Installation

@@ -1,0 +1,157 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="707" measuredH="648" mockupW="451" mockupH="639">
+	<controls>
+		<control controlID="42" controlTypeID="com.balsamiq.mockups::FieldSet" x="256" y="179" w="451" h="469" measuredW="200" measuredH="170" zOrder="0" locked="false" isInGroup="-1">
+			<controlProperties>
+				<text>TechDivision.Neos.Search</text>
+			</controlProperties>
+		</control>
+		<control controlID="51" controlTypeID="com.balsamiq.mockups::Arrow" x="428" y="118" w="10" h="179" measuredW="150" measuredH="100" zOrder="6" locked="false" isInGroup="-1">
+			<controlProperties>
+				<backgroundAlpha>1</backgroundAlpha>
+				<direction>bottom</direction>
+				<leftArrow>true</leftArrow>
+				<rightArrow>false</rightArrow>
+				<text>implements</text>
+			</controlProperties>
+		</control>
+		<control controlID="62" controlTypeID="__group__" x="271" y="206" w="421" h="157" measuredW="421" measuredH="157" zOrder="8" locked="false" isInGroup="-1">
+			<groupChildrenDescriptors>
+				<control controlID="0" controlTypeID="com.balsamiq.mockups::MultilineButton" x="0" y="95" w="203" h="62" measuredW="176" measuredH="62" zOrder="0" locked="false" isInGroup="62">
+					<controlProperties>
+						<size>14</size>
+						<text>ResultFactoryInterface</text>
+					</controlProperties>
+				</control>
+				<control controlID="1" controlTypeID="com.balsamiq.mockups::Arrow" x="352" y="27" w="10" h="68" measuredW="150" measuredH="100" zOrder="1" locked="false" isInGroup="62">
+					<controlProperties>
+						<direction>bottom</direction>
+						<leftArrow>true</leftArrow>
+						<rightArrow>false</rightArrow>
+						<text>implements</text>
+					</controlProperties>
+				</control>
+				<control controlID="2" controlTypeID="com.balsamiq.mockups::Arrow" x="57" y="27" w="10" h="68" measuredW="150" measuredH="100" zOrder="2" locked="false" isInGroup="62">
+					<controlProperties>
+						<direction>bottom</direction>
+						<leftArrow>true</leftArrow>
+						<rightArrow>false</rightArrow>
+						<text>implements</text>
+					</controlProperties>
+				</control>
+				<control controlID="3" controlTypeID="com.balsamiq.mockups::Button" x="294" y="0" w="127" h="27" measuredW="127" measuredH="27" zOrder="3" locked="false" isInGroup="62">
+					<controlProperties>
+						<text>DocumentFactory</text>
+					</controlProperties>
+				</control>
+				<control controlID="4" controlTypeID="com.balsamiq.mockups::Button" x="10" y="0" w="-1" h="-1" measuredW="105" measuredH="27" zOrder="4" locked="false" isInGroup="62">
+					<controlProperties>
+						<text>ResultFactory</text>
+					</controlProperties>
+				</control>
+				<control controlID="5" controlTypeID="com.balsamiq.mockups::MultilineButton" x="218" y="95" w="203" h="62" measuredW="200" measuredH="62" zOrder="5" locked="false" isInGroup="62">
+					<controlProperties>
+						<size>14</size>
+						<text>DocumentFactoryInterface</text>
+					</controlProperties>
+				</control>
+			</groupChildrenDescriptors>
+		</control>
+		<control controlID="63" controlTypeID="com.balsamiq.mockups::Button" x="416" y="434" w="117" h="27" measuredW="113" measuredH="27" zOrder="2" locked="false" isInGroup="-1">
+			<controlProperties>
+				<color>16777215</color>
+				<text>SearchProvider</text>
+			</controlProperties>
+		</control>
+		<control controlID="64" controlTypeID="com.balsamiq.mockups::Arrow" x="411" y="363" w="19" h="71" measuredW="150" measuredH="100" zOrder="3" locked="false" isInGroup="-1">
+			<controlProperties>
+				<direction>top</direction>
+				<leftArrow>true</leftArrow>
+				<rightArrow>false</rightArrow>
+				<text>uses</text>
+			</controlProperties>
+		</control>
+		<control controlID="65" controlTypeID="com.balsamiq.mockups::Arrow" x="522" y="363" w="21" h="71" measuredW="150" measuredH="100" zOrder="4" locked="false" isInGroup="-1">
+			<controlProperties>
+				<direction>bottom</direction>
+				<leftArrow>false</leftArrow>
+				<rightArrow>true</rightArrow>
+				<text>uses</text>
+			</controlProperties>
+		</control>
+		<control controlID="70" controlTypeID="__group__" x="285" y="476" w="389" h="146" measuredW="389" measuredH="146" zOrder="1" locked="false" isInGroup="-1">
+			<groupChildrenDescriptors>
+				<control controlID="0" controlTypeID="com.balsamiq.mockups::FieldSet" x="0" y="0" w="389" h="146" measuredW="200" measuredH="170" zOrder="0" locked="false" isInGroup="70">
+					<controlProperties>
+						<color>16777215</color>
+						<text>Objects.yaml</text>
+					</controlProperties>
+				</control>
+				<control controlID="1" controlTypeID="__group__" x="19" y="23" w="351" h="105" measuredW="351" measuredH="105" zOrder="1" locked="false" isInGroup="70">
+					<groupChildrenDescriptors>
+						<control controlID="3" controlTypeID="__group__" x="0" y="0" w="171" h="105" measuredW="171" measuredH="105" zOrder="0" locked="false" isInGroup="1">
+							<groupChildrenDescriptors>
+								<control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="171" h="105" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="3">
+									<controlProperties>
+										<color>65535</color>
+									</controlProperties>
+								</control>
+								<control controlID="1" controlTypeID="com.balsamiq.mockups::RadioButtonGroup" x="9" y="7" w="-1" h="-1" measuredW="132" measuredH="83" zOrder="1" locked="false" isInGroup="3">
+									<controlProperties>
+										<text>Which%20ResultFactory%3F%0A%28%20%29%20ResultFactory%0A%28o%29%20YourResultFactory%0A%28%20%29%20...</text>
+									</controlProperties>
+								</control>
+							</groupChildrenDescriptors>
+						</control>
+						<control controlID="4" controlTypeID="__group__" x="179" y="0" w="172" h="105" measuredW="172" measuredH="105" zOrder="1" locked="false" isInGroup="1">
+							<groupChildrenDescriptors>
+								<control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="172" h="105" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="4">
+									<controlProperties>
+										<color>16776960</color>
+									</controlProperties>
+								</control>
+								<control controlID="1" controlTypeID="com.balsamiq.mockups::RadioButtonGroup" x="9" y="7" w="-1" h="-1" measuredW="154" measuredH="83" zOrder="1" locked="false" isInGroup="4">
+									<controlProperties>
+										<text>Which%20DocumentFactory%3F%0A%28%20%29%20DocumentFactory%0A%28o%29%20YourDocumentFactory%0A%28%20%29%20...</text>
+									</controlProperties>
+								</control>
+							</groupChildrenDescriptors>
+						</control>
+					</groupChildrenDescriptors>
+				</control>
+			</groupChildrenDescriptors>
+		</control>
+		<control controlID="72" controlTypeID="__group__" x="326" y="9" w="323" h="141" measuredW="323" measuredH="141" zOrder="5" locked="false" isInGroup="-1">
+			<groupChildrenDescriptors>
+				<control controlID="0" controlTypeID="com.balsamiq.mockups::FieldSet" x="0" y="0" w="323" h="141" measuredW="200" measuredH="170" zOrder="0" locked="false" isInGroup="72">
+					<controlProperties>
+						<color>16777215</color>
+						<text>Your.Package</text>
+					</controlProperties>
+				</control>
+				<control controlID="1" controlTypeID="com.balsamiq.mockups::Button" x="94" y="32" w="157" h="27" measuredW="157" measuredH="27" zOrder="1" locked="false" isInGroup="72">
+					<controlProperties>
+						<color>16776960</color>
+						<text>Your%20DocumentFactory</text>
+					</controlProperties>
+				</control>
+				<control controlID="2" controlTypeID="com.balsamiq.mockups::Button" x="40" y="87" w="135" h="27" measuredW="135" measuredH="27" zOrder="2" locked="false" isInGroup="72">
+					<controlProperties>
+						<color>65535</color>
+						<text>Your%20ResultFactory</text>
+					</controlProperties>
+				</control>
+			</groupChildrenDescriptors>
+		</control>
+		<control controlID="74" controlTypeID="com.balsamiq.mockups::Arrow" x="526" y="64" w="10" h="233" measuredW="150" measuredH="100" zOrder="7" locked="false" isInGroup="-1">
+			<controlProperties>
+				<backgroundAlpha>1</backgroundAlpha>
+				<color>0</color>
+				<curvature>1</curvature>
+				<direction>bottom</direction>
+				<leftArrow>true</leftArrow>
+				<rightArrow>false</rightArrow>
+				<text>implements</text>
+			</controlProperties>
+		</control>
+	</controls>
+</mockup>

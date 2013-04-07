@@ -1,0 +1,28 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="487" measuredH="468" mockupW="231" mockupH="289">
+	<controls>
+		<control controlID="42" controlTypeID="com.balsamiq.mockups::FieldSet" x="256" y="179" w="231" h="289" measuredW="200" measuredH="170" zOrder="0" locked="false" isInGroup="-1">
+			<controlProperties>
+				<text>TechDivision.Neos.Search</text>
+			</controlProperties>
+		</control>
+		<control controlID="70" controlTypeID="__group__" x="279" y="211" w="183" h="232" measuredW="183" measuredH="232" zOrder="1" locked="false" isInGroup="-1">
+			<groupChildrenDescriptors>
+				<control controlID="4" controlTypeID="__group__" x="0" y="0" w="183" h="232" measuredW="183" measuredH="232" zOrder="0" locked="false" isInGroup="70">
+					<groupChildrenDescriptors>
+						<control controlID="0" controlTypeID="com.balsamiq.mockups::FieldSet" x="0" y="0" w="183" h="232" measuredW="200" measuredH="170" zOrder="0" locked="false" isInGroup="4">
+							<controlProperties>
+								<color>16777215</color>
+								<text>Settings.yaml</text>
+							</controlProperties>
+						</control>
+						<control controlID="1" controlTypeID="com.balsamiq.mockups::CheckBoxGroup" x="15" y="24" w="-1" h="-1" measuredW="160" measuredH="193" zOrder="1" locked="false" isInGroup="4">
+							<controlProperties>
+								<text>Which%20TYPO3%20NodeTypes%3F%0A%5B%20%5D%20Selection%0A%5Bx%5D%20Page%0A%5Bx%5D%20Headline%0A%5Bx%5D%20Text%0A%5B%20%5D%20Three%20Column%0A%5B%20%5D%20...%0AMore%20Options%0A...</text>
+							</controlProperties>
+						</control>
+					</groupChildrenDescriptors>
+				</control>
+			</groupChildrenDescriptors>
+		</control>
+	</controls>
+</mockup>

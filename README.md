@@ -7,8 +7,7 @@ pages with node changes automatically update the node documents in index. There 
 up to date. There is a command controller to add/update/remove all nodes in index.  There is also a backend module
 provided for this.
 
-This package uses the [TechDivision.Search](https://github.com/mwitte/TechDivision.Search) package as search backend
-interface which requires by default the solr php extension.
+This package uses the [TechDivision.Search](https://github.com/mwitte/TechDivision.Search) package as search backend.
 
 
 Installation
