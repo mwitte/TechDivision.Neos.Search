@@ -59,6 +59,8 @@ implement and factories to extend are listed below:
 
 For using your own factories look into the Configuration/Objects.yaml how to configure that.
 
+![chart](https://raw.github.com/mwitte/TechDivision.Neos.Search/master/Documentation/charts/FactoryAdapter.png)
+
 Use other search backend
 ------------------------
 
@@ -66,6 +68,7 @@ The search backend in the TechDivision.Search package is completely convertible.
 to learn how to add an other search backend implementation.
 For using your own search backend look into the Configuration/Objects.yaml how to configure that.
 
+![chart](https://raw.github.com/mwitte/TechDivision.Neos.Search/master/Documentation/charts/ProviderAdapter.png)
 
 Testing
 -------
