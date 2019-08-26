@@ -1,3 +1,5 @@
+!!DEPRECATED!!
+
 TechDivision.Neos.Search
 ========================
 
